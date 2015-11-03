@@ -1,0 +1,23 @@
+#coeur{
+	margin: auto;
+	color: red;
+	/*background-color: green;*/
+	font-size: 30px;
+	text-align: center;
+}
+
+.bandeau{
+	width:100%;
+	padding-top: 1%;
+}
+
+#task_form{
+	float: left;
+	text-align: center;
+	/*background-color: blue;*/
+	font-size: 20px;
+}
+
+#form{
+/*	background-color: yellow;*/
+}
