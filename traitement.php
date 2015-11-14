@@ -38,20 +38,15 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
             $prior = htmlentities($_POST["prior"]);
             $av = htmlentities($_POST["av"]);
             $ap = htmlentities($_POST["ap"]);
-            
+            $dl = htmlentities($_POST["dl"]);
+            $hl = htmlentities($_POST["hl"]);
+                        
             // Les comptes utilisateurs ne sont pas encore fonctionnels.
             $id_owner = '1';
             
-            // Notre Datetime combine les dl et hl
-            $date = htmlentities($_POST["dl"]);
-            $hl = htmlentities($_POST["hl"]);
-            $dl = $date.' '.$hl;
-
-            echo($dl);
-
-            // Insertion de la nouvelle tâche à l'aide d'une requête préparée
-            $req = $bdd -> prepare('INSERT INTO task ( name_task, id_category, id_owner, dl, prior, av, ap) VALUES (:name_task, :id_category, :id_owner, :dl, :prior, :av, :ap)');
-            $req-> execute(array(  'name_task' => $name_task, 'id_category' => $id_category, 'id_owner' => $id_owner, 'dl' => $dl, 'prior' => $prior, 'av' => $av, 'ap' => $ap  ));
+                        // Insertion de la nouvelle tâche à l'aide d'une requête préparée
+            $req = $bdd -> prepare('INSERT INTO task ( name_task, id_category, id_owner, dl, hl, prior, av, ap) VALUES (:name_task, :id_category, :id_owner, :dl, :hl, :prior, :av, :ap)');
+            $req-> execute(array(  'name_task' => $name_task, 'id_category' => $id_category, 'id_owner' => $id_owner, 'dl' => $dl, 'hl' => $hl, 'prior' => $prior, 'av' => $av, 'ap' => $ap  ));
 
             echo('REQUETE EXECUTEE');
             
@@ -83,6 +78,6 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
         }
     }
 }
-//header('Location: index.php?bug=FIN');
-echo('<br> C EST GAGNE !<br>');
+header('Location: index.php?message=TASKisADDED');
+// echo('<br> C EST GAGNE !<br>');
 ?>

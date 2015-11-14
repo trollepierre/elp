@@ -63,10 +63,10 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                         <label for="id_category" class="col-sm-3 control-label">Catégorie</label>
                         <div class="input-group col-sm-6 col-xs-12">
                             <select class="form-control" name="id_category">
-                                <option value="france">Test</option>
-                                <option value="espagne">Startup</option>
-                                <option value="italie">Taf</option>
-                                <option value="royaume-uni">Autre</option>
+                                <option value="0">Aucune Catégorie</option>
+                                <!-- <option value="1">Startup</option>
+                                <option value="2">Taf</option>
+                                <option value="3">Autre</option> -->
                             </select>
                         </div>
                     </div>
@@ -74,10 +74,11 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                     <!-- Ajout de la DL -->
                     <div class="form-group">
                         <label for="dl" class="col-sm-3 control-label">Date Limite</label>
-                        <div class="input-group date form_date col-sm-6 col-xs-12" data-date="" data-date-format="dd MM yyyy" data-link-field="dl" data-link-format="yyyy-mm-dd">
-                            <input class="form-control" size="16" type="text" value="" name="dl" readonly>
+                        <div class="input-group date form_date col-sm-6 col-xs-12" data-date="" data-date-format="yy-mm-dd" data-link-field="dl" data-link-format="yy-mm-dd">
+                            <input class="form-control" size="16" type="text" value="" name="dl"  >
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+
                         </div>
                         <!--  <input type="hidden" id="dl" value="" /><br/> -->
                     </div>
@@ -86,7 +87,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                     <div class="form-group">
                         <label for="hl" class="col-sm-3 control-label">Heure Limite</label>
                         <div class="input-group date form_time col-sm-6 col-xs-12" data-date="" data-date-format="hh:ii" data-link-field="hl" data-link-format="hh:ii">
-                            <input class="form-control" size="16" type="text" value="" name="hl" readonly>
+                            <input class="form-control" size="16" type="time" value="" name="hl" >
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                         </div>
@@ -98,10 +99,10 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                         <label for="av" class="col-sm-3 control-label">Avant</label>
                         <div class="input-group col-sm-6 col-xs-12">
                             <select class="form-control" name='av'>
-                                <option value="royaume-uni">Aucun Tâche</option>
-                                <option value="france">Task1</option>
-                                <option value="espagne">Task2</option>
-                                <option value="italie">Task3</option>
+                                <option value="0">Aucun Tâche</option>
+                                <!-- <option value="1">Task1</option>
+                                <option value="2">Task2</option>
+                                <option value="3">Task3</option> -->
                             </select>
                         </div>
                     </div>
@@ -111,10 +112,10 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                         <label for="ap" class="col-sm-3 control-label">Après</label>
                         <div class="input-group col-sm-6 col-xs-12">
                             <select class="form-control" name='ap'>
-                                <option value="france">Aucune</option>
-                                <option value="espagne">Task1</option>
-                                <option value="italie">Task2</option>
-                                <option value="royaume-uni">Task3</option>
+                                <option value="0">Aucune Tâche</option>
+                                <!-- <option value="1">Task1</option>
+                                <option value="2">Task2</option>
+                                <option value="3-uni">Task3</option> -->
                             </select>
                         </div>
                     </div>
