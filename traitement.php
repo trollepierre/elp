@@ -63,17 +63,17 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
     }else{
     
         if(!(isset($_SESSION['token']))){
-            //header('Location: index.php?bug=SESSION_TOKEN');  
+            header('Location: index.php?bug=SESSION_TOKEN');  
             echo('Token de session non défini');
         } 
         
         if(!(isset($_SESSION['token_time']))) {
-            //header('Location: index.php?bug=SESSION_TOKEN_TIME');
+            header('Location: index.php?bug=SESSION_TOKEN_TIME');
             echo('Temps du Token de session non défini');
         }
         
         if (!(isset($_POST['token']))){
-            //header('Location: index.php?bug=TOKEN');
+            header('Location: index.php?bug=TOKEN');
             echo('Pas de token envoyé en hidden dans le formulaire, c est pas malin');
         }
     }
