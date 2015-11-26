@@ -144,13 +144,13 @@ foreach ($tableau1 as $k => $val) {
 
                 //add multiple select / deselect functionnality
                 $("#selectall").click(function(){
-                    $('.case').attr('checked',this.checked);
+                    $('.case').prop('checked',this.checked);
                 });
 
                 // if all checkbox are selected, check the selectall checkbox and viceversa
                 $(".case").click(function(){
                     if ($(".case").length == $(".case:checked").length) {
-                        $("#selectall").attr("checked","checked");
+                        $("#selectall").prop("checked","checked");
                     }else{
                         $("#selectall").removeAttr("checked");
                     }
