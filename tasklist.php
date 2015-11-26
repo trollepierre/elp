@@ -124,24 +124,24 @@ foreach ($tableau1 as $k => $val) {
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- ligne118 -->
             <script type="text/javascript">
             $(function(){
-                /*// suppression des cases cochées
-                $("#delete").click(function(){
-                    //pour chaque case coché, je supprime en SQL la value avec l'id
-                    //=> forcer l'user à cocher !!!!
-                <?php include('connexion.php'); 
-                    // pour chaque case checked
-                    foreach() {?>
-                        $(".case:checked")
-                        //faire
-                        $idAVirer= $(".case:checked").value;
-                        <?php 
-                        $bdd->query('DELETE FROM task WHERE id ='.$idAVirer.'');
-                        ?>
-                    }
-                    //reload de lapage
+                // // suppression des cases cochées
+                // $("#delete").click(function(){
+                //     //pour chaque case coché, je supprime en SQL la value avec l'id
+                //     //=> forcer l'user à cocher !!!!
+                // <?php include('connexion.php'); 
+                //     // pour chaque case checked
+                //     foreach() {?>
+                //         $(".case:checked")
+                //         //faire
+                //         $idAVirer= $(".case:checked").value;
+                //         <?php 
+                //         $bdd->query('DELETE FROM task WHERE id ='.$idAVirer.'');
+                //         ?>
+                //     }
+                //     //reload de lapage
 
-                })
-*/
+                // })
+
                 //add multiple select / deselect functionnality
                 $("#selectall").click(function(){
                     $('.case').attr('checked',this.checked);
