@@ -9,14 +9,6 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
 <?php include('connexion.php'); ?>
 
     <!DOCTYPE HTML>
-    <!--
-    /*
-     * El Projector 
-     * https://github.com/trollepierre/tdm
-     * Copyright 2015, Pierre Trolle
-     * http://pierre.recontact.me
-     */
-    -->
     <!-- <html lang="fr"> -->
     <head>
         <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <![endif]-->
@@ -31,8 +23,6 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
     </head>
 
     <body>
-
-
     <!-- Le bandeau principal avec le texte -->
         <div id="coeur" class="bandeau">
             <h1>H E L P</h1>
@@ -40,7 +30,6 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
         </div>
 
 <!-- Modif apportée ci-dessous uniquement -->
-
 <?php
 $NbrColonne = 8;
 // La requete (exemple) : toutes les "CHOSE" commençant par un "b", classées par ordre alphabétique.
@@ -70,8 +59,6 @@ while ($val = $reponse->fetch())
     $tableau8[$k] = $val['ap'];
     $k++;
 }
-// --------------------------------
-// affichage
 ?>
 <div class="table-responsive">
   <table class="table table-hover table-bordered table-condensed table-striped">

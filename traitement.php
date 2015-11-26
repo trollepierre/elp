@@ -18,7 +18,7 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
         $timestamp_ancien = time() - (15*60);                                       //Stockage du timestamp d'il y a 15 minutes
         if($_SESSION['token_time'] >= $timestamp_ancien)
         {                           //Si le jeton n'est pas expiré
-            if(  startsWith($_SERVER['HTTP_REFERER'],'http://localhost/elp') || startsWith($_SERVER['HTTP_REFERER'],'http://elp.recontact.me'))
+            if(  startsWith($_SERVER['HTTP_REFERER'],'http://localhost/elp') || startsWith($_SERVER['HTTP_REFERER'],'http://elprojector.recontact.me'))
             {
                 fputs($monfichier,'SERVER OK'."\r\n");          echo('SERVER OK <br>');
                 include('connexion.php');
