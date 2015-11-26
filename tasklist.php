@@ -20,6 +20,25 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- ligne118 -->
+            <script type="text/javascript">
+            $(function(){
+                //add multiple select / deselect functionnality
+                $("#selectall").click(function(){
+                    $('.case').attr('checked',this.checked);
+                });
+
+                // if all checkbox are selected, check the selectall checkbox and viceversa
+                $(".case").click(function(){
+                    if ($(".case").length == $(".case:checked").length) {
+                        $("#selectall").attr("checked","checked");
+                    }else{
+                        $("#selectall").removeAttr("checked");
+                    }
+                    
+                });
+            });
+            </script>
     </head>
 
     <body>
@@ -60,7 +79,7 @@ while ($val = $reponse->fetch())
   <table class="table table-hover table-bordered table-condensed table-striped">
     <tbody>
         <tr>
-            <th><input id="checkall" type="checkbox"></th>
+            <th><input id="selectall" type="checkbox"></th>
             <th>Criticité (%)</th>
             <th>Date Limite</th>
             <th>Heure Limite</th>
@@ -77,7 +96,7 @@ arsort($tableau1);
 foreach ($tableau1 as $k => $val) {
     $val=floor($val);
 ?>      <tr> 
-            <td><input id="checkbox" class="checkall" type="checkbox" value="category" name="selected[]"></input></td>
+            <td><input class="case" type="checkbox" name="case"></input></td>
             <td><?php echo $val;?></td>
             <td><?php echo $tableau2[$k]; ?></td>
             <td><?php echo $tableau3[$k]; ?></td>
@@ -115,7 +134,6 @@ foreach ($tableau1 as $k => $val) {
 
             <br>
 
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
             <script type="text/javascript" src="js/bootstrap.min.js"></script>
     </body>
 
