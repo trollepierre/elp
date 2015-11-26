@@ -40,7 +40,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
         <!-- Le bandeau du formulaire de tâche -->
         <div id="task_form" class="bandeau">
             <h3>Ajoutez une tâche :</h3>
-            <form action="traitement.php" role="form" id="form" method="post" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
+            <form action="traitement.php" role="form" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
                 <div style="display:none;">
                     <input type="hidden" name="token" value=<?php echo $token; ?> />
                     <!-- <input type="hidden" name="token" value=time()/> -->
@@ -54,7 +54,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                     <div class="form-group">
                         <label for="name_task" class="col-sm-3 control-label">Tâche</label>
                         <div class="input-group col-sm-6 col-xs-12 col-xs-12">
-                            <input type="text" class="form-control" id="name_task" name="name_task" placeholder="Nom de la Tâche" />
+                            <input type="text" class="form-control" id="name_task" name="name_task" placeholder="Nom de la Tâche" required/>
                         </div>
                     </div>
 
@@ -75,7 +75,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                     <div class="form-group">
                         <label for="dl" class="col-sm-3 control-label">Date Limite</label>
                         <div class="input-group date form_date col-sm-6 col-xs-12" data-date="" data-date-format="yy-mm-dd" data-link-field="dl" data-link-format="yy-mm-dd">
-                            <input class="form-control" size="16" type="text" value="" name="dl"  >
+                            <input class="form-control" size="16" type="text" value="" name="dl" required >
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 
@@ -87,7 +87,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                     <div class="form-group">
                         <label for="hl" class="col-sm-3 control-label">Heure Limite</label>
                         <div class="input-group date form_time col-sm-6 col-xs-12" data-date="" data-date-format="hh:ii" data-link-field="hl" data-link-format="hh:ii">
-                            <input class="form-control" size="16" type="time" value="" name="hl" >
+                            <input class="form-control" size="16" type="time" value="8:00" name="hl">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                         </div>
@@ -143,10 +143,29 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
             <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
             <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 
+
+            <script type="text/javascript">
+           /* function validateForm(){
+                var x = document.forms["myForm"]["fname"].value;
+                if (x==null || x = ""){
+                    alert("Name must be filled out");
+                    return false;
+                }
+            }*/
+
+            /*var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1;
+            var yy = today.getYear();
+            if(dd<10){dd='0'+dd}
+            if(mm<10){mm='0'+mm}
+            today= yy + '-' + mm + '-' + dd;
+            document.getElementsByName('dl').value = today;
+            */</script>
             <!-- Langue du calendrier -->
             <script type="text/javascript">
                 $('.form_date').datetimepicker({
-                    language: 'fr',
+                    language: 'en',
                     weekStart: 1,
                     todayBtn: 1,
                     autoclose: 1,
@@ -156,7 +175,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                     forceParse: 0
                 });
                 $('.form_time').datetimepicker({
-                    language: 'fr',
+                    language: 'en',
                     weekStart: 1,
                     todayBtn: 1,
                     autoclose: 1,
