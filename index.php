@@ -42,7 +42,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
             <h3>Ajoutez une tâche :</h3>
             <form action="traitement.php" role="form" id="form" method="post" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
                 <div style="display:none;">
-                    <input type="hidden" name="token" value=<?php echo htmlspecialchars($token); ?> />
+                    <input type="hidden" name="token" value=<?php echo $token; ?> />
                     <!-- <input type="hidden" name="token" value=time()/> -->
                     <!-- <input type="hidden" name="_method" value="POST"/>
                     <input type="hidden" name="data[_Token][key]" value="0e6e74bd6cf9ca9b3229ff15c180a11e1eb6822e" id="Token1108905194"/> -->

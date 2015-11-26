@@ -12,7 +12,10 @@ fputs($monfichier,"\r\n".date("Y-m-d H:i:s")."\r\n");
 //On va vérifier si le jeton est présent dans la session et dans le formulaire
 if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['token'])))
 {    //Si le jeton de la session correspond à celui du formulaire
-    fputs($monfichier,"\r\n"."je suis là"."\r\n");
+    $token = $_SESSION['token'] ;
+    $token2 = $_POST['token'] ;
+    fputs($monfichier,"\r\n".$token."\r\n");
+    fputs($monfichier,"\r\n".$token2."\r\n");
     if($_SESSION['token'] == $_POST['token'])
     {
         fputs($monfichier,"SESSION OK"."\r\n");                 echo('SESSION OK'); echo('<br>');
