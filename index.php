@@ -30,6 +30,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
 
     <body>
 
+<?php if(isset($_GET['message'])){echo '<script type="text/javascript"> alert("La tâche a été ajoutée avec succès !") </script>';}?>
 
     <!-- Le bandeau principal avec le texte -->
         <div id="coeur" class="bandeau">
@@ -43,13 +44,8 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
             <form action="traitement.php" role="form" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
                 <div style="display:none;">
                     <input type="hidden" name="token" value=<?php echo $token; ?> />
-                    <!-- <input type="hidden" name="token" value=time()/> -->
-                    <!-- <input type="hidden" name="_method" value="POST"/>
-                    <input type="hidden" name="data[_Token][key]" value="0e6e74bd6cf9ca9b3229ff15c180a11e1eb6822e" id="Token1108905194"/> -->
                 </div> 
-                <!--  <input type="hidden" name="data[Event][id]" value="14" id="EventId"/> -->
                 <fieldset>
-
                     <!-- Ajout du nom de la tâche -->
                     <div class="form-group">
                         <label for="name_task" class="col-sm-3 control-label">Tâche</label>
@@ -165,7 +161,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
             <!-- Langue du calendrier -->
             <script type="text/javascript">
                 $('.form_date').datetimepicker({
-                    language: 'en',
+                    language: 'fr',
                     weekStart: 1,
                     todayBtn: 1,
                     autoclose: 1,
@@ -175,7 +171,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                     forceParse: 0
                 });
                 $('.form_time').datetimepicker({
-                    language: 'en',
+                    language: 'fr',
                     weekStart: 1,
                     todayBtn: 1,
                     autoclose: 1,

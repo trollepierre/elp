@@ -17,8 +17,8 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
         <meta name="description" content="El Projector is an assistant to help you to manage your life projects.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
     </head>
 
@@ -31,10 +31,6 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
 
 <!-- Modif apportée ci-dessous uniquement -->
 <?php
-$NbrColonne = 8;
-// La requete (exemple) : toutes les "CHOSE" commençant par un "b", classées par ordre alphabétique.
-// $query = "SELECT * FROM MATABLE WHERE CHOSE LIKE 'b%' ORDER BY CHOSE ASC;";
-
 $reponse = $bdd->query('SELECT * FROM task');
 $k=0;
 
@@ -64,6 +60,7 @@ while ($val = $reponse->fetch())
   <table class="table table-hover table-bordered table-condensed table-striped">
     <tbody>
         <tr>
+            <th><input id="checkall" type="checkbox"></th>
             <th>Criticité (%)</th>
             <th>Date Limite</th>
             <th>Heure Limite</th>
@@ -80,6 +77,7 @@ arsort($tableau1);
 foreach ($tableau1 as $k => $val) {
     $val=floor($val);
 ?>      <tr> 
+            <td><input id="checkbox" class="checkall" type="checkbox" value="category" name="selected[]"></input></td>
             <td><?php echo $val;?></td>
             <td><?php echo $tableau2[$k]; ?></td>
             <td><?php echo $tableau3[$k]; ?></td>
