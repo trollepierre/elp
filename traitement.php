@@ -48,11 +48,8 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
                 fputs($monfichier,'Problème de HTTP_REFERER'."\r\n");
             }
         }else{
-            //header('Location: index.php?bug=OK4');   
             fputs($monfichier,'Jeton trop vieux - 15 minutes maximum'."\r\n"); echo('Jeton trop vieux - 15 minutes maximum');
         }
-        //header('Location: index.php?PAS_DE_BUG');   
-        // echo("D'où sortez-vous ce jeton et/ou comment avez-vous pu changer votre session !");
     }else{
         fputs($monfichier,'Jeton de session différent du jeton donné'."\r\n"); echo('Jeton de session différent du jeton donné');
     }

@@ -30,7 +30,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
         </div>
 
 <!-- Modif apportée ci-dessous uniquement -->
-<a class="btn btn-danger" href="#"><i class="glyphicon glyphicon-trash"></i> Supprimer</a>
+<button id="delete" class="btn btn-danger" type="button"><i class="glyphicon glyphicon-trash"></i> Supprimer</button>
 <br/><br>
 
 <?php
@@ -56,6 +56,7 @@ while ($val = $reponse->fetch())
     $tableau6[$k] = $prior;
     $tableau7[$k] = $val['av'];
     $tableau8[$k] = $val['ap'];
+    $tableau9[$k] = $val['id'];
     $k++;
 }
 ?>
@@ -80,7 +81,7 @@ arsort($tableau1);
 foreach ($tableau1 as $k => $val) {
     $val=floor($val);
 ?>      <tr> 
-            <td><input class="case" type="checkbox" name="case"></input></td>
+            <td><input class="case" type="checkbox" value="".<?php echo $tableau9[$k];?>."" name="case"></input></td>
             <td><?php echo $val;?></td>
             <td><?php echo $tableau2[$k]; ?></td>
             <td><?php echo $tableau3[$k]; ?></td>
@@ -123,6 +124,24 @@ foreach ($tableau1 as $k => $val) {
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- ligne118 -->
             <script type="text/javascript">
             $(function(){
+                /*// suppression des cases cochées
+                $("#delete").click(function(){
+                    //pour chaque case coché, je supprime en SQL la value avec l'id
+                    //=> forcer l'user à cocher !!!!
+                <?php include('connexion.php'); 
+                    // pour chaque case checked
+                    foreach() {?>
+                        $(".case:checked")
+                        //faire
+                        $idAVirer= $(".case:checked").value;
+                        <?php 
+                        $bdd->query('DELETE FROM task WHERE id ='.$idAVirer.'');
+                        ?>
+                    }
+                    //reload de lapage
+
+                })
+*/
                 //add multiple select / deselect functionnality
                 $("#selectall").click(function(){
                     $('.case').attr('checked',this.checked);
