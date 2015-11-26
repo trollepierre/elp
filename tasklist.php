@@ -20,25 +20,6 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- ligne118 -->
-            <script type="text/javascript">
-            $(function(){
-                //add multiple select / deselect functionnality
-                $("#selectall").click(function(){
-                    $('.case').attr('checked',this.checked);
-                });
-
-                // if all checkbox are selected, check the selectall checkbox and viceversa
-                $(".case").click(function(){
-                    if ($(".case").length == $(".case:checked").length) {
-                        $("#selectall").attr("checked","checked");
-                    }else{
-                        $("#selectall").removeAttr("checked");
-                    }
-                    
-                });
-            });
-            </script>
     </head>
 
     <body>
@@ -49,6 +30,9 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
         </div>
 
 <!-- Modif apportée ci-dessous uniquement -->
+<a class="btn btn-danger" href="#"><i class="glyphicon glyphicon-trash"></i> Supprimer</a>
+<br/><br>
+
 <?php
 $reponse = $bdd->query('SELECT * FROM task');
 $k=0;
@@ -131,10 +115,30 @@ foreach ($tableau1 as $k => $val) {
 
     
 <!-- Modif apportée ci-dessus uniquement -->
+            
 
             <br>
 
             <script type="text/javascript" src="js/bootstrap.min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- ligne118 -->
+            <script type="text/javascript">
+            $(function(){
+                //add multiple select / deselect functionnality
+                $("#selectall").click(function(){
+                    $('.case').attr('checked',this.checked);
+                });
+
+                // if all checkbox are selected, check the selectall checkbox and viceversa
+                $(".case").click(function(){
+                    if ($(".case").length == $(".case:checked").length) {
+                        $("#selectall").attr("checked","checked");
+                    }else{
+                        $("#selectall").removeAttr("checked");
+                    }
+                    
+                });
+            });
+            </script>
     </body>
 
     </html>
