@@ -92,7 +92,7 @@ elseif($val>25){echo "info";}
 else{echo "active";}
 ?>      
 ">
-            <td><input class="case" type="checkbox" value="".<?php echo $tableau9[$k];?>."" name="case"></input></td>
+            <td><input class="case" type="checkbox" value="<?php echo $tableau9[$k];?>" name="case"></input></td>
             <td><?php echo $val;?></td>
             <td><?php echo $tableau2[$k]; ?></td>
             <td><?php echo $tableau3[$k]; ?></td>
@@ -130,26 +130,28 @@ else{echo "active";}
                 // suppression des cases cochées
                 $("#delete").click(function(){
                     //=> vérifier qu'une case est cochée !!!!
-                    alert("Delete enclenché");
-                    $tokenJS =  '<?php echo $token; ?>'  ;  
+                    // alert("Delete enclenché");
+                    $tokenJS =  "<?php echo $_SESSION['token']; ?>"  ; 
                     //pour chaque case coché, je supprime en SQL la value avec l'id
-                    $.ajax({
-                        method: "POST",
-                        url: "delete.php",
-                        data: { 
-                            // je veux récupérer un id de la checkbox, pour savoir quoi supprimer sur ma database
-                            // il y a cette ligne qui se balade qq dans le code pour info
-                            //<td><input class="case" type="checkbox" value="".<?php echo $tableau9[$k];?>."" name="case"></input></td>
-                            id: $(".case:checked"), 
-                            token: $tokenJS
-                        }
-                    })
-                    
-                    .done(function (){
-                        alert("Data deleted");
-                    //reload de lapage
-                    })
-                    ;
+                    $(".case:checked").each(function(){
+                        //alert($tokenJS+" : ce token ");
+                        // alert($(this).attr("value") +" : la value ");
+                        $.ajax({
+                            method: "POST",
+                           url: "delete.php",
+                            data: { 
+                                // je veux récupérer un id de la checkbox, pour savoir quoi supprimer sur ma database
+                                // il y a cette ligne qui se balade qq dans le code pour info
+                                //<td><input class="case" type="checkbox" value="".<?php echo $tableau9[$k];?>."" name="case"></input></td>
+                                id: $(this).attr("value"), 
+                                token: $tokenJS
+                            }
+                        })
+                        .done(function (){
+                            alert("Data deleted");
+                        //reload de lapage
+                         });
+                    });
                 });
 
                 //add multiple select / deselect functionnality
