@@ -85,10 +85,10 @@ foreach ($tableau1 as $k => $val) {
 ?>
 <tr class="
 <?php
-if($val>1000){echo "danger";}
-elseif($val>100){echo "warning";}
+if($val>150){echo "danger";}
+elseif($val>75){echo "warning";}
 elseif($val>50){echo "success";}
-elseif($val>10){echo "info";}
+elseif($val>25){echo "info";}
 else{echo "active";}
 ?>      
 ">
@@ -130,6 +130,7 @@ else{echo "active";}
                 // suppression des cases cochées
                 $("#delete").click(function(){
                     //=> vérifier qu'une case est cochée !!!!
+                    alert("Delete enclenché");
                     $tokenJS =  '<?php echo $token; ?>'  ;  
                     //pour chaque case coché, je supprime en SQL la value avec l'id
                     $.ajax({
