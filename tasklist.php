@@ -30,28 +30,29 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
         </div>
 
 <!-- Modif apportée ci-dessous uniquement -->
-<button id="delete" class="btn btn-danger" type="button"><i class="glyphicon glyphicon-trash"></i> Supprimer</button>
-<br/><br>
+    <button id="delete" class="btn btn-danger" type="button"><i class="glyphicon glyphicon-trash"></i> Supprimer</button>
+    <br/><br>
 
 <?php
 $reponse = $bdd->query('SELECT * FROM task');
 $k=0;
-
 // On affiche chaque entrée une à une
 while ($val = $reponse->fetch())
 {
     $dl = $val['dl'];
+    $hl = $val['hl']; //retirer les 3 derniers caractères
     $prior = $val['prior'];
     $exp = 2*$prior-1;
     $date = new DateTime($dl);
     $now = new DateTime();
     $interval = date_diff($date, $now);
-    $retVal = ($interval->invert) ? -$interval->days : $interval->days ;
+    // si interval est négatif alors mettre un - devant et soustraire l'hl pour ordonner ; le +1 vient de l'erreur de diff
+    $retVal = ($interval->invert) ? -$interval->days - $hl /24 : $interval->days +1 -$hl/ 24 ;
     $magique=20*log10(1+pow(10, $exp)*pow(2,$retVal));
     $tableau1[$k] = $magique;
     $tableau2[$k] = $dl;
-    $tableau3[$k] = $val['hl'];
-    $tableau4[$k] = html_entity_decode(htmlentities($val['name_task']));
+    $tableau3[$k] = str_split($hl,5)[0];
+    $tableau4[$k] = html_entity_decode($val['name_task']);
     $tableau5[$k] = $val['id_category'];
     $tableau6[$k] = $prior;
     $tableau7[$k] = $val['av'];
@@ -76,11 +77,21 @@ while ($val = $reponse->fetch())
         </tr>
 <?php
 //tri tableau
+if(!empty( $tableau1)) {
 arsort($tableau1);
 
 foreach ($tableau1 as $k => $val) {
     $val=floor($val);
-?>      <tr> 
+?>
+<tr class="
+<?php
+if($val>1000){echo "danger";}
+elseif($val>100){echo "warning";}
+elseif($val>50){echo "success";}
+elseif($val>10){echo "info";}
+else{echo "active";}
+?>      
+">
             <td><input class="case" type="checkbox" value="".<?php echo $tableau9[$k];?>."" name="case"></input></td>
             <td><?php echo $val;?></td>
             <td><?php echo $tableau2[$k]; ?></td>
@@ -100,47 +111,45 @@ foreach ($tableau1 as $k => $val) {
             <td><?php echo $tableau7[$k]; ?></td>
             <td><?php echo $tableau8[$k]; ?></td>
         </tr>
-<?php } ?>
+<?php } 
+}
+//tableau vide
+?>
    </tbody>
     </table>
     </div>
-
-
-    <!-- on le strip de lignes bleu/blanc déjà -->
-<!-- <tr class="danger">...</tr>
-<tr class="info">...</tr>
-<tr class="success">...</tr>
-<tr class="warning">...</tr>
-<tr class="active">...</tr> -->
-  
-
     
 <!-- Modif apportée ci-dessus uniquement -->
-            
-
             <br>
 
             <script type="text/javascript" src="js/bootstrap.min.js"></script>
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- ligne118 -->
             <script type="text/javascript">
             $(function(){
-                // // suppression des cases cochées
-                // $("#delete").click(function(){
-                //     //pour chaque case coché, je supprime en SQL la value avec l'id
-                //     //=> forcer l'user à cocher !!!!
-                // <?php include('connexion.php'); 
-                //     // pour chaque case checked
-                //     foreach() {?>
-                //         $(".case:checked")
-                //         //faire
-                //         $idAVirer= $(".case:checked").value;
-                //         <?php 
-                //         $bdd->query('DELETE FROM task WHERE id ='.$idAVirer.'');
-                //         ?>
-                //     }
-                //     //reload de lapage
-
-                // })
+                
+                // suppression des cases cochées
+                $("#delete").click(function(){
+                    //=> vérifier qu'une case est cochée !!!!
+                    $tokenJS =  '<?php echo $token; ?>'  ;  
+                    //pour chaque case coché, je supprime en SQL la value avec l'id
+                    $.ajax({
+                        method: "POST",
+                        url: "delete.php",
+                        data: { 
+                            // je veux récupérer un id de la checkbox, pour savoir quoi supprimer sur ma database
+                            // il y a cette ligne qui se balade qq dans le code pour info
+                            //<td><input class="case" type="checkbox" value="".<?php echo $tableau9[$k];?>."" name="case"></input></td>
+                            id: $(".case:checked"), 
+                            token: $tokenJS
+                        }
+                    })
+                    
+                    .done(function (){
+                        alert("Data deleted");
+                    //reload de lapage
+                    })
+                    ;
+                });
 
                 //add multiple select / deselect functionnality
                 $("#selectall").click(function(){
