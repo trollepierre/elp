@@ -131,11 +131,11 @@ else{echo "active";}
                 $("#delete").click(function(){
                     $tokenJS =  "<?php echo $_SESSION['token']; ?>"  ; 
                     $(".case:checked").each(function(){
-                        .ajax({
+                        $.ajax({
                             method: "POST",
                            url: "delete.php",
                             data: { 
-                                id: $(this).val, 
+                                id: $(this).attr("value"), 
                                 token: $tokenJS
                             }
                         })
