@@ -129,21 +129,13 @@ else{echo "active";}
                 
                 // suppression des cases cochées
                 $("#delete").click(function(){
-                    //=> vérifier qu'une case est cochée !!!!
-                    // alert("Delete enclenché");
                     $tokenJS =  "<?php echo $_SESSION['token']; ?>"  ; 
-                    //pour chaque case coché, je supprime en SQL la value avec l'id
                     $(".case:checked").each(function(){
-                        //alert($tokenJS+" : ce token ");
-                        // alert($(this).attr("value") +" : la value ");
-                        $.ajax({
+                        .ajax({
                             method: "POST",
                            url: "delete.php",
                             data: { 
-                                // je veux récupérer un id de la checkbox, pour savoir quoi supprimer sur ma database
-                                // il y a cette ligne qui se balade qq dans le code pour info
-                                //<td><input class="case" type="checkbox" value="".<?php echo $tableau9[$k];?>."" name="case"></input></td>
-                                id: $(this).attr("value"), 
+                                id: $(this).val, 
                                 token: $tokenJS
                             }
                         })
