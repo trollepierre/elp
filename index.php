@@ -1,11 +1,13 @@
 <?php   
-// Token pour Formulaire
 session_start();//On démarre les sessions
-$token = uniqid(rand(), true);//On génére un jeton totalement unique (c'est capital :D)
+
+// Token pour Formulaire
+$token = (isset($_SESSION['token'])) ? $_SESSION['token'] : uniqid(rand(), true) ;//On génére un jeton totalement unique
 $_SESSION['token'] = $token;//Et on le stocke
 $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondant au moment de la création du token
 //Maintenant, on affiche notre page normalement, le champ caché token en plus
 ?>
+
     <!DOCTYPE HTML>
     <!--
     /*
@@ -30,9 +32,11 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
 
     <body>
 
-<?php if(isset($_GET['message'])){echo '<script type="text/javascript"> alert("La tâche a été ajoutée avec succès !") </script>';}?>
+<?php if(isset($_GET['message'])){echo '<script type="text/javascript"> alert("La tâche a été ajoutée avec succès !") </script>';}
+    elseif (isset($_GET['bug'])){echo '<script type="text/javascript"> alert("Bug ! Désolé : la tâche non ajoutée !") </script>';}
+?>
 
-    <!-- Le bandeau principal avec le texte -->
+   <!-- Le bandeau principal avec le texte -->
         <div id="coeur" class="bandeau">
             <h1>H E L P</h1>
             <h2>El Projector  à la rescousse</h2>
@@ -43,14 +47,14 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
             <h3>Ajoutez une tâche :</h3>
             <form action="traitement.php" role="form" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
                 <div style="display:none;">
-                    <input type="hidden" name="token" value=<?php echo $token; ?> />
+                    <input type="hidden" name="token" value=<?php echo $_SESSION['token']; ?> />
                 </div> 
                 <fieldset>
                     <!-- Ajout du nom de la tâche -->
                     <div class="form-group">
                         <label for="name_task" class="col-sm-3 control-label">Tâche</label>
                         <div class="input-group col-sm-6 col-xs-12 col-xs-12">
-                            <input type="text" class="form-control" id="name_task" name="name_task" placeholder="Nom de la Tâche" required/>
+                            <input type="text" class="form-control" id="name_task" name="name_task" maxlength="50" placeholder="Nom de la Tâche" required autofocus/>
                         </div>
                     </div>
 
@@ -71,7 +75,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                     <div class="form-group">
                         <label for="dl" class="col-sm-3 control-label">Date Limite</label>
                         <div class="input-group date form_date col-sm-6 col-xs-12" data-date="" data-date-format="yy-mm-dd" data-link-field="dl" data-link-format="yy-mm-dd">
-                            <input class="form-control" size="16" type="text" value="" name="dl" required >
+                            <input class="form-control" size="16" type="text" value="" placeholder="yy-mm-dd" name="dl" maxlength="8" pattern="[0-9]{2}-[0-9]{1,2}-[0-9]{1,2}" required >
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 
@@ -83,7 +87,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                     <div class="form-group">
                         <label for="hl" class="col-sm-3 control-label">Heure Limite</label>
                         <div class="input-group date form_time col-sm-6 col-xs-12" data-date="" data-date-format="hh:ii" data-link-field="hl" data-link-format="hh:ii">
-                            <input class="form-control" size="16" type="time" value="8:00" name="hl">
+                            <input class="form-control" size="16" type="time" placeholder="hh:mm" value="8:00" name="hl" pattern="[0-2]{0,1}[0-9]{1}:[0-5]{1}[0-9]{1}" maxlength="8" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                         </div>
@@ -141,13 +145,28 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
 
 
             <script type="text/javascript">
-           /* function validateForm(){
-                var x = document.forms["myForm"]["fname"].value;
-                if (x==null || x = ""){
-                    alert("Name must be filled out");
+            function validateForm(){
+                var dl = document.forms["form"]["dl"].value ;
+                var hl = document.forms["form"]["hl"].value ;
+                // alert("voici : "+x+' !');
+                var tableau = dl.split("-");
+                var tableauH = hl.split(":");
+                if (dl==null || dl == "" || tableau[1]>12 || tableau[2]>31){
+                    alert("Le format de la date n'est pas correct. Utilisez le format yy-mm-dd");
                     return false;
                 }
-            }*/
+                if (tableau[0]<15 || tableau[0]>17){
+                    if(confirm('Une tâche prévue pour '+tableau[0]+' ? Vous confirmez ?')){
+                        return true;
+                    }
+                    return false;
+                }
+                if(tableauH[0]>23){
+                    alert("Depuis quand les montres affichent des heures de plus de 24h ?");
+                    return false;  
+                }
+                return true;
+            }
 
             /*var today = new Date();
             var dd = today.getDate();
