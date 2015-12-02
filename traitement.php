@@ -14,8 +14,8 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
 {    //Si le jeton de la session correspond à celui du formulaire
     $token = $_SESSION['token'] ;
     $token2 = $_POST['token'] ;
-    fputs($monfichier,"\r\n".$token."\r\n");
-    fputs($monfichier,"\r\n".$token2."\r\n");
+    fputs($monfichier,"".$token."\r\n");
+    fputs($monfichier,"".$token2."\r\n");
     if($_SESSION['token'] == $_POST['token'])
     {
         fputs($monfichier,"SESSION OK"."\r\n");                 echo('SESSION OK'); echo('<br>');
@@ -42,32 +42,34 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
                 $req = $bdd -> prepare('INSERT INTO task ( name_task, id_category, id_owner, dl, hl, prior, av, ap) VALUES (:name_task, :id_category, :id_owner, :dl, :hl, :prior, :av, :ap)');
                 $req-> execute(array(  'name_task' => $name_task, 'id_category' => $id_category, 'id_owner' => $id_owner, 'dl' => $dl, 'hl' => $hl, 'prior' => $prior, 'av' => $av, 'ap' => $ap  ));
 
-                fputs($monfichier,'REQUETE EXECUTEE'."\r\n");   echo('REQUETE EXECUTEE');
+                fputs($monfichier,'REQUETE EXECUTEE'."\r\n");   
+                header('Location: index.php?message=TASKisADDED');
             }else{
-                echo('Problème de HTTP_REFERER');
                 fputs($monfichier,'Problème de HTTP_REFERER'."\r\n");
+                header('Location: index.php?bug=HTTP_REFERER');
             }
         }else{
-            fputs($monfichier,'Jeton trop vieux - 15 minutes maximum'."\r\n"); echo('Jeton trop vieux - 15 minutes maximum');
+            fputs($monfichier,'Jeton trop vieux - 15 minutes maximum'."\r\n"); 
+            header('Location: index.php?bug=OLD_TOKEN');
         }
     }else{
-        fputs($monfichier,'Jeton de session différent du jeton donné'."\r\n"); echo('Jeton de session différent du jeton donné');
+        fputs($monfichier,'Jeton de session différent du jeton donné'."\r\n"); 
+        header('Location: index.php?bug=DIFFERENTS_TOKENS');  
     }
 }else{
         if(!(isset($_SESSION['token']))){
             header('Location: index.php?bug=SESSION_TOKEN');  
-            fputs($monfichier,'Token de session non défini'."\r\n"); echo('Token de session non défini');
+            fputs($monfichier,'Token de session non défini'."\r\n"); 
         }             
         if(!(isset($_SESSION['token_time']))) {
             header('Location: index.php?bug=SESSION_TOKEN_TIME');
-            fputs($monfichier,'Temps du Token de session non défini'."\r\n"); echo('Temps du Token de session non défini');
+            fputs($monfichier,'Temps du Token de session non défini'."\r\n"); 
         }            
         if (!(isset($_POST['token']))){
             header('Location: index.php?bug=TOKEN');
-            fputs($monfichier,'Pas de token envoyé en hidden dans le formulaire, c est pas malin'."\r\n"); echo('Pas de token envoyé en hidden dans le formulaire, c est pas malin');
+            fputs($monfichier,'Pas de token envoyé en hidden dans le formulaire, c est pas malin'."\r\n"); 
         }
 }
-header('Location: index.php?message=TASKisADDED');
-fputs($monfichier,"Fin programme"."\r\n");                  echo('<br> C EST GAGNE !<br>');
+fputs($monfichier,"Fin programme"."\r\n");                  
 fclose($monfichier);
 ?>
