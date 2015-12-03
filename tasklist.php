@@ -17,9 +17,11 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
         <meta name="description" content="El Projector is an assistant to help you to manage your life projects.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/css.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!--   <link rel="stylesheet" href="css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+        <link rel="stylesheet" href="css/css.css">
+        
     </head>
 
     <body>
@@ -122,22 +124,34 @@ else{echo "active";}
 <!-- Modif apportée ci-dessus uniquement -->
             <br>
 
-            <script type="text/javascript" src="js/bootstrap.min.js"></script>
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- ligne118 -->
+            <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+            <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+            <!-- <script type="text/javascript" src="js/jquery-11.1.3.min.js"></script> -->
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
             <script type="text/javascript">
             $(function(){
                 
                 // suppression des cases cochées
-                $("#delete").click(function(){
-                    $tokenJS =  "<?php echo $_SESSION['token']; ?>"  ; 
+                $("#delete").on('click',function(){
                     $(".case:checked").each(function(){
                         $.ajax({
                             method: "POST",
-                           url: "delete.php",
+                            url: "delete.php",
                             data: { 
-                                id: $(this).attr("value"), 
-                                token: $tokenJS
-                            }
+                                id: $(this).val(), 
+                                token: "<?php echo $_SESSION['token']; ?>"
+                            },
+                            success: function(){location.reload();}
+                            // success: function(data){
+                            //         console.log("data was sent!");
+                            //     if(data.hasOwnProperty('success')){
+                            //         $reload_on_return=true;
+                            //         if(reload_on_return){
+                            //             location.reload();
+                            //         }
+                            //     }
+                            // }
                         })
                         .done(function (){
                             alert("Data deleted");
