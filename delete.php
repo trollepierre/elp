@@ -32,7 +32,7 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
                 // Suppression de la nouvelle tâche à l'aide d'une requête préparée
                 $req = $bdd -> prepare('DELETE FROM task WHERE id = :unID ');
                 $req-> execute(array( 'unID' => $_POST['id']));
-                fputs($monfichier,"DELETE FROM task WHERE id = ".$_POST['id']." cetait id \r\n");
+                fputs($monfichier,"DELETE FROM task WHERE id = ".$_POST['id']."\r\n");
 
                 fputs($monfichier,'REQUETE EXECUTEE'."\r\n");   echo('REQUETE EXECUTEE');
             }else{

@@ -1,23 +1,18 @@
 <?php   
-session_start();//On démarre les sessions
-
-// Token pour Formulaire
-$token = (isset($_SESSION['token'])) ? $_SESSION['token'] : uniqid(rand(), true) ;//On génére un jeton totalement unique
-$_SESSION['token'] = $token;//Et on le stocke
-$_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondant au moment de la création du token
-//Maintenant, on affiche notre page normalement, le champ caché token en plus
+    session_start();//On démarre les sessions
+    $_SESSION['token'] = (isset($_SESSION['token'])) ? $_SESSION['token'] : uniqid(rand(), true) ;//Génération de jeton unique
+    $_SESSION['token_time'] = time();//Enregistrement d'un timestamp
 ?>
-
-    <!DOCTYPE HTML>
-    <!--
+<!DOCTYPE HTML>
+<!--
     /*
-     * El Projector 
-     * https://github.com/trollepierre/tdm
-     * Copyright 2015, Pierre Trolle
-     * http://pierre.recontact.me
-     */
-    -->
-    <!-- <html lang="fr"> -->
+    * El Projector 
+    * https://github.com/trollepierre/elp
+    * Copyright 2015, Pierre Trolle
+    * http://pierre.recontact.me
+    */
+-->
+<html lang="fr"> 
     <head>
         <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <![endif]-->
         <meta charset="utf-8">
@@ -25,9 +20,10 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
         <meta name="description" content="El Projector is an assistant to help you to manage your life projects.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="css/css.css">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!--   <link rel="stylesheet" href="css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+        <link rel="stylesheet" href="css/css.css">
     </head>
 
     <body>
@@ -36,7 +32,7 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
     elseif (isset($_GET['bug'])){echo '<script type="text/javascript"> alert("Bug ! Désolé : la tâche non ajoutée !") </script>';}
 ?>
 
-   <!-- Le bandeau principal avec le texte -->
+        <!-- Le bandeau principal avec le texte -->
         <div id="coeur" class="bandeau">
             <h1>H E L P</h1>
             <h2>El Projector  à la rescousse</h2>
@@ -80,7 +76,6 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 
                         </div>
-                        <!--  <input type="hidden" id="dl" value="" /><br/> -->
                     </div>
 
                     <!-- Ajout de la HL -->
@@ -91,7 +86,6 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                         </div>
-                        <!--   <input type="hidden" id="hl" value="" /><br/> -->
                     </div>
 
                     <!-- Ajout de tâche précédente -->
@@ -134,73 +128,61 @@ $_SESSION['token_time'] = time();//On enregistre aussi le timestamp correspondan
                 </fieldset>
                 <button type="submit" class="btn btn-default">Envoyer</button>
             </form>
-
-
-            <br>
-
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script type="text/javascript" src="js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
-            <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-
-
-            <script type="text/javascript">
-            function validateForm(){
-                var dl = document.forms["form"]["dl"].value ;
-                var hl = document.forms["form"]["hl"].value ;
-                // alert("voici : "+x+' !');
-                var tableau = dl.split("-");
-                var tableauH = hl.split(":");
-                if (dl==null || dl == "" || tableau[1]>12 || tableau[2]>31){
-                    alert("Le format de la date n'est pas correct. Utilisez le format yy-mm-dd");
-                    return false;
-                }
-                if (tableau[0]<15 || tableau[0]>17){
-                    if(confirm('Une tâche prévue pour '+tableau[0]+' ? Vous confirmez ?')){
-                        return true;
-                    }
-                    return false;
-                }
-                if(tableauH[0]>23){
-                    alert("Depuis quand les montres affichent des heures de plus de 24h ?");
-                    return false;  
-                }
-                return true;
+        </div>
+        <br>
+        <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <!-- <script type="text/javascript" src="js/jquery-11.1.3.min.js"></script> -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+        <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+        <script type="text/javascript">
+        function validateForm(){
+            var dl = document.forms["form"]["dl"].value ;
+            var hl = document.forms["form"]["hl"].value ;
+            // alert("voici : "+x+' !');
+            var tableau = dl.split("-");
+            var tableauH = hl.split(":");
+            if (dl==null || dl == "" || tableau[1]>12 || tableau[2]>31){
+                alert("Le format de la date n'est pas correct. Utilisez le format yy-mm-dd");
+                return false;
             }
-
-            /*var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth()+1;
-            var yy = today.getYear();
-            if(dd<10){dd='0'+dd}
-            if(mm<10){mm='0'+mm}
-            today= yy + '-' + mm + '-' + dd;
-            document.getElementsByName('dl').value = today;
-            */</script>
-            <!-- Langue du calendrier -->
-            <script type="text/javascript">
-                $('.form_date').datetimepicker({
-                    language: 'fr',
-                    weekStart: 1,
-                    todayBtn: 1,
-                    autoclose: 1,
-                    todayHighlight: 1,
-                    startView: 2,
-                    minView: 2,
-                    forceParse: 0
-                });
-                $('.form_time').datetimepicker({
-                    language: 'fr',
-                    weekStart: 1,
-                    todayBtn: 1,
-                    autoclose: 1,
-                    todayHighlight: 1,
-                    startView: 1,
-                    minView: 0,
-                    maxView: 1,
-                    forceParse: 0
-                });
-            </script>
+            if (tableau[0]<15 || tableau[0]>17){
+                if(confirm('Une tâche prévue pour '+tableau[0]+' ? Vous confirmez ?')){
+                    return true;
+                }
+                return false;
+            }
+            if(tableauH[0]>23){
+                alert("Depuis quand les montres affichent des heures de plus de 24h ?");
+                return false;  
+            }
+            return true;
+        }
+        </script>
+        <!-- Langue du calendrier -->
+        <script type="text/javascript">
+            $('.form_date').datetimepicker({
+                language: 'fr',
+                weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0
+            });
+            $('.form_time').datetimepicker({
+                language: 'fr',
+                weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 1,
+                minView: 0,
+                maxView: 1,
+                forceParse: 0
+            });
+        </script>
     </body>
-
-    </html>
+</html>
