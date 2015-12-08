@@ -9,12 +9,17 @@
     <head>
         <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <![endif]-->
         <meta charset="utf-8">
-        <title>El Projector</title>
         <meta name="description" content="El Projector is an assistant to help you to manage your life projects.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="">
+
+        <title>Liste des tâches - El Projector </title>
         <!--   <link rel="stylesheet" href="css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+        <link rel="stylesheet" href="../1external/bootstrap-datetimepicker.css">
         <link rel="stylesheet" href="css/css.css">        
     </head>
     <body>
@@ -56,7 +61,7 @@
             <table class="table table-hover table-bordered table-condensed table-striped">
                 <tbody>
                     <tr>
-                        <th><input id="selectall" type="checkbox"></th>
+                        <th><input id="selectall" type="checkbox" autofocus></th>
                         <th>Criticité (%)</th>
                         <th>Date Limite</th>
                         <th>Heure Limite</th>
@@ -107,9 +112,9 @@ if(!empty( $tableau1)) {
             </table>
         </div>
         <br>
-        <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+        <!-- <script type="text/javascript" src="../1external/bootstrap.min.js"></script> -->
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <!-- <script type="text/javascript" src="js/jquery-11.1.3.min.js"></script> -->
+        <!-- <script type="text/javascript" src="../1external/jquery-11.1.3.min.js"></script> -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
         <script type="text/javascript">
         $(function(){                

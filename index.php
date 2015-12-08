@@ -16,12 +16,17 @@
     <head>
         <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <![endif]-->
         <meta charset="utf-8">
-        <title>El Projector</title>
-        <meta name="description" content="El Projector is an assistant to help you to manage your life projects.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="title" content="El Projector !"/>
+        <meta name="description" content="El Projector is an assistant to help you to manage your life projects.">
+        <meta name="author" content="Pierre Trollé">
+        <link rel="icon" href="../../favicon.ico">
 
+        <title>El Projector</title>
+        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <!--   <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+        <!--   <link rel="stylesheet" href="../1external/bootstrap.min.css"> -->
         <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
         <link rel="stylesheet" href="css/css.css">
     </head>
@@ -49,7 +54,7 @@
                     <!-- Ajout du nom de la tâche -->
                     <div class="form-group">
                         <label for="name_task" class="col-sm-3 control-label">Tâche</label>
-                        <div class="input-group col-sm-6 col-xs-12 col-xs-12">
+                        <div class="input-group col-sm-6 col-xs-12">
                             <input type="text" class="form-control" id="name_task" name="name_task" maxlength="50" placeholder="Nom de la Tâche" required autofocus/>
                         </div>
                     </div>
@@ -130,9 +135,9 @@
             </form>
         </div>
         <br>
-        <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+        <!-- <script type="text/javascript" src="../1external/bootstrap.min.js"></script> -->
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <!-- <script type="text/javascript" src="js/jquery-11.1.3.min.js"></script> -->
+        <!-- <script type="text/javascript" src="../1external/jquery-11.1.3.min.js"></script> -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
         <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
         <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>

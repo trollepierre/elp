@@ -5,7 +5,6 @@ function startsWith($haystack, $needle) {
     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
 }
 
- // //header('Location: index.php?Cool=OK7');
 $monfichier = fopen('log.txt', 'a+');
 fseek($monfichier, 0);
 fputs($monfichier,"\r\n".date("Y-m-d H:i:s")."\r\n");
