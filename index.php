@@ -75,8 +75,8 @@
                     <!-- Ajout de la DL -->
                     <div class="form-group">
                         <label for="dl" class="col-sm-3 control-label">Date Limite</label>
-                        <div class="input-group date form_date col-sm-6 col-xs-12" data-date="" data-date-format="yy-mm-dd" data-link-field="dl" data-link-format="yy-mm-dd">
-                            <input class="form-control" size="16" type="text" value="" placeholder="yy-mm-dd" name="dl" maxlength="8" pattern="[0-9]{2}-[0-9]{1,2}-[0-9]{1,2}" required >
+                        <div class="input-group date form_date col-sm-6 col-xs-12" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dl" data-link-format="dd/mm/yyyy">
+                            <input class="form-control" size="16" type="text" value="" placeholder="dd/mm/yyyy" name="dl" maxlength="8" pattern="[0-3]{1}[0-9]{1}/[0-1]{1}[0-9]{1}/[0-9]{4}" required >
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 
@@ -146,14 +146,14 @@
             var dl = document.forms["form"]["dl"].value ;
             var hl = document.forms["form"]["hl"].value ;
             // alert("voici : "+x+' !');
-            var tableau = dl.split("-");
+            var tableau = dl.split("/");
             var tableauH = hl.split(":");
-            if (dl==null || dl == "" || tableau[1]>12 || tableau[2]>31){
-                alert("Le format de la date n'est pas correct. Utilisez le format yy-mm-dd");
+            if (dl==null || dl == "" || tableau[1]>12 || tableau[0]>31){
+                alert("Le format de la date n'est pas correct. Utilisez le format dd/mm/yyyy");
                 return false;
             }
-            if (tableau[0]<15 || tableau[0]>17){
-                if(confirm('Une tâche prévue pour '+tableau[0]+' ? Vous confirmez ?')){
+            if (tableau[2]<2015 || tableau[2]>2017){
+                if(confirm('Une tâche prévue pour '+tableau[2]+' ? Vous confirmez ?')){
                     return true;
                 }
                 return false;

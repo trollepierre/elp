@@ -33,8 +33,11 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
                 $prior = $_POST["prior"];
                 $av = $_POST["av"];
                 $ap = $_POST["ap"];
-                $dl = $_POST["dl"];
                 $hl = $_POST["hl"];
+                $dlATraiter = $_POST["dl"];
+                $dlCoupee = split("/", $dlATraiter);
+                $dl = $dlCoupee[2]."-".$dlCoupee[1]."-".$dlCoupee[0];
+                fputs($monfichier,$dl."\r\n"); 
                 $id_owner = '1';                                // Les comptes utilisateurs ne sont pas encore fonctionnels.
             
                 // Insertion de la nouvelle tâche à l'aide d'une requête préparée
