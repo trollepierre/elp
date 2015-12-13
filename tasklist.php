@@ -19,7 +19,6 @@
         <title>Liste des tâches - El Projector </title>
         <!--   <link rel="stylesheet" href="css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../1external/bootstrap-datetimepicker.css">
         <link rel="stylesheet" href="css/css.css">        
     </head>
     <body>

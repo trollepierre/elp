@@ -139,8 +139,8 @@
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <!-- <script type="text/javascript" src="../1external/jquery-11.1.3.min.js"></script> -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-        <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
-        <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="../1external/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript" src="../1external/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
         <script type="text/javascript">
         function validateForm(){
             var dl = document.forms["form"]["dl"].value ;
