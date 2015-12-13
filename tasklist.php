@@ -25,8 +25,8 @@
     <body>
     <!-- Le bandeau principal avec le texte -->
         <div id="coeur" class="bandeau">
-            <h1>H E L P</h1>
-            <h2>El Projector  à la rescousse</h2>
+            <h1>H E L P - El Projector  à la rescousse </h1>
+            <h2></h2>
         </div>
         <button id="delete" class="btn btn-danger" type="button"><i class="glyphicon glyphicon-trash"></i> Supprimer</button>
         <br/><br>

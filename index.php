@@ -39,8 +39,8 @@
 
         <!-- Le bandeau principal avec le texte -->
         <div id="coeur" class="bandeau">
-            <h1>H E L P</h1>
-            <h2>El Projector  à la rescousse</h2>
+            <h1> H E L P - El Projector à la rescousse</h1>
+            <h2><a href="tasklist.php" class="underline" title="Voir la liste des tâches">Voir la liste des tâches</a></h2>
         </div>
 
         <!-- Le bandeau du formulaire de tâche -->
