@@ -5,8 +5,7 @@ function startsWith($haystack, $needle) {
     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
 }
 
- // //header('Location: index.php?Cool=OK7');
-$monfichier = fopen('logDelete.txt', 'a+');
+$monfichier = fopen('log/logDelete.txt', 'a+');
 fseek($monfichier, 0);
 fputs($monfichier,"\r\n".date("Y-m-d H:i:s")."\r\n");
 //On va vérifier si le jeton est présent dans la session et dans le formulaire

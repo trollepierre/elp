@@ -5,7 +5,7 @@ function startsWith($haystack, $needle) {
     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
 }
 
-$monfichier = fopen('log.txt', 'a+');
+$monfichier = fopen('log/logTraitement.txt', 'a+');
 fseek($monfichier, 0);
 fputs($monfichier,"\r\n".date("Y-m-d H:i:s")."\r\n");
 //On va vérifier si le jeton est présent dans la session et dans le formulaire
