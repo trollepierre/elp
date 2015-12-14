@@ -47,7 +47,7 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
 
                 // if $model = non vierge alors definir projet suivant model
 
-                header('Location: definir.php?model=new ');
+                header('Location: ../definir.php?model=new');
             }else{
                 fputs($monfichier,'Problème de HTTP_REFERER'."\r\n");
                 header('Location: ../index.php?bug=HTTP_REFERER');
