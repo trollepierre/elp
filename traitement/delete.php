@@ -5,7 +5,7 @@ function startsWith($haystack, $needle) {
     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
 }
 
-$monfichier = fopen('log/logDelete.txt', 'a+');
+$monfichier = fopen('../log/logDelete.txt', 'a+');
 fseek($monfichier, 0);
 fputs($monfichier,"\r\n".date("Y-m-d H:i:s")."\r\n");
 //On va vérifier si le jeton est présent dans la session et dans le formulaire
@@ -46,19 +46,19 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
     }
 }else{
         if(!(isset($_SESSION['token']))){
-            header('Location: index.php?bug=SESSION_TOKEN');  
+            header('Location: ../index.php?bug=SESSION_TOKEN');  
             fputs($monfichier,'Token de session non défini'."\r\n"); echo('Token de session non défini');
         }             
         if(!(isset($_SESSION['token_time']))) {
-            header('Location: index.php?bug=SESSION_TOKEN_TIME');
+            header('Location: ../index.php?bug=SESSION_TOKEN_TIME');
             fputs($monfichier,'Temps du Token de session non défini'."\r\n"); echo('Temps du Token de session non défini');
         }            
         if (!(isset($_POST['token']))){
-            header('Location: index.php?bug=TOKEN');
+            header('Location: ../index.php?bug=TOKEN');
             fputs($monfichier,'Pas de token envoyé en hidden dans le formulaire, c est pas malin'."\r\n"); echo('Pas de token envoyé en hidden dans le formulaire, c est pas malin');
         }
 }
-header('Location: index.php?message=TASKisDELETED');
+header('Location: ../index.php?message=TASKisDELETED');
 fputs($monfichier,"Fin programme"."\r\n");                  echo('<br> C EST GAGNE !<br>');
 fclose($monfichier);
 ?>

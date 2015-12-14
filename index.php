@@ -46,7 +46,7 @@
         <!-- Le bandeau du formulaire de tâche -->
         <div id="task_form" class="bandeau">
             <h3>Ajoutez une tâche :</h3>
-            <form action="traitement.php" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
+            <form action="traitement/newTask.php" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
                 <div style="display:none;">
                     <input type="hidden" name="token" value=<?php echo $_SESSION['token']; ?> />
                 </div> 

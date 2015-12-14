@@ -5,7 +5,7 @@ function startsWith($haystack, $needle) {
     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
 }
 
-$monfichier = fopen('log/logTraitement.txt', 'a+');
+$monfichier = fopen('../log/logTraitement.txt', 'a+');
 fseek($monfichier, 0);
 fputs($monfichier,"\r\n".date("Y-m-d H:i:s")."\r\n");
 //On va vérifier si le jeton est présent dans la session et dans le formulaire
@@ -45,30 +45,30 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
                 $req-> execute(array(  'name_task' => $name_task, 'id_category' => $id_category, 'id_owner' => $id_owner, 'dl' => $dl, 'hl' => $hl, 'prior' => $prior, 'av' => $av, 'ap' => $ap  ));
 
                 fputs($monfichier,'REQUETE EXECUTEE'."\r\n");   
-                header('Location: index.php?message=TASKisADDED');
+                header('Location: ../index.php?message=TASKisADDED');
             }else{
                 fputs($monfichier,'Problème de HTTP_REFERER'."\r\n");
-                header('Location: index.php?bug=HTTP_REFERER');
+                header('Location: ../index.php?bug=HTTP_REFERER');
             }
         }else{
             fputs($monfichier,'Jeton trop vieux - 15 minutes maximum'."\r\n"); 
-            header('Location: index.php?bug=OLD_TOKEN');
+            header('Location: ../index.php?bug=OLD_TOKEN');
         }
     }else{
         fputs($monfichier,'Jeton de session différent du jeton donné'."\r\n"); 
-        header('Location: index.php?bug=DIFFERENTS_TOKENS');  
+        header('Location: ../index.php?bug=DIFFERENTS_TOKENS');  
     }
 }else{
         if(!(isset($_SESSION['token']))){
-            header('Location: index.php?bug=SESSION_TOKEN');  
+            header('Location: ../index.php?bug=SESSION_TOKEN');  
             fputs($monfichier,'Token de session non défini'."\r\n"); 
         }             
         if(!(isset($_SESSION['token_time']))) {
-            header('Location: index.php?bug=SESSION_TOKEN_TIME');
+            header('Location: ../index.php?bug=SESSION_TOKEN_TIME');
             fputs($monfichier,'Temps du Token de session non défini'."\r\n"); 
         }            
         if (!(isset($_POST['token']))){
-            header('Location: index.php?bug=TOKEN');
+            header('Location: ../index.php?bug=TOKEN');
             fputs($monfichier,'Pas de token envoyé en hidden dans le formulaire, c est pas malin'."\r\n"); 
         }
 }

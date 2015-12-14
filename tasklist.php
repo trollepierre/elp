@@ -3,7 +3,7 @@
     $_SESSION['token'] = (isset($_SESSION['token'])) ? $_SESSION['token'] : uniqid(rand(), true) ;//Génération de jeton unique
     $_SESSION['token_time'] = time();//Enregistrement d'un timestamp
 ?>
-<?php include('connexion.php'); ?>
+<?php include('traitement/connexion.php'); ?>
 <!DOCTYPE HTML>
 <html lang="fr">
     <head>
@@ -11,7 +11,8 @@
         <meta charset="utf-8">
         <meta name="description" content="El Projector is an assistant to help you to manage your life projects.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        
+        <meta name="title" content="Liste des tâches - El Projector !"/>
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="">
@@ -123,7 +124,7 @@ if(!empty( $tableau1)) {
                     $(this).parents("tr").get(0).remove();
                     $.ajax({
                         method: "POST",
-                        url: "delete.php",
+                        url: "traitement/delete.php",
                         data: { 
                             id: $(this).val(), 
                             token: "<?php echo $_SESSION['token']; ?>"
