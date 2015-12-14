@@ -46,7 +46,7 @@
         <!-- Le bandeau du formulaire de tâche -->
         <div id="task_form" class="bandeau">
             <h3>Ajoutez une tâche :</h3>
-            <form action="traitement.php" role="form" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
+            <form action="traitement.php" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
                 <div style="display:none;">
                     <input type="hidden" name="token" value=<?php echo $_SESSION['token']; ?> />
                 </div> 
@@ -156,7 +156,7 @@
                 alert("Depuis quand les montres affichent des heures de plus de 24h ?");
                 return false;  
             }
-            if(tableau[0]>[31, ((((tableau[2] % 4 === 0) && (tableau[2] % 100 !== 0)) || (tableau[2] % 400 === 0)) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][tableau[1]-1];){
+            if(tableau[0]> [31, ((((tableau[2] % 4 === 0) && (tableau[2] % 100 !== 0)) || (tableau[2] % 400 === 0)) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][tableau[1]-1]){
                 alert("Et la Saint Glinglin, c'est tous les 35 du mois, aussi ?");
                 return false;     
             }
