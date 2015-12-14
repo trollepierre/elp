@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label for="name_task" class="col-sm-3 control-label">Tâche</label>
                         <div class="input-group col-sm-6 col-xs-12">
-                            <input type="text" class="form-control" id="name_task" maxlength="50" placeholder="Nom de la Tâche" required autofocus/>
+                            <input type="text" class="form-control" name="id_task" id="name_task" maxlength="50" placeholder="Nom de la Tâche" required autofocus/>
                         </div>
                     </div>
 
@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <label for="id_category" class="col-sm-3 control-label">Catégorie</label>
                         <div class="input-group col-sm-6 col-xs-12">
-                            <select class="form-control" id="id_category">
+                            <select class="form-control" id="id_category" name="id_category">
                                 <option value="0">Aucune Catégorie</option>
                                 <!-- <option value="1">Startup</option>
                                 <option value="2">Taf</option>
@@ -76,7 +76,7 @@
                     <div class="form-group">
                         <label for="dl" class="col-sm-3 control-label">Date Limite</label>
                         <div class="input-group date form_date col-sm-6 col-xs-12" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dl" data-link-format="dd/mm/yyyy">
-                            <input class="form-control" size="16" type="text" value="" placeholder="dd/mm/yyyy" id="dl" maxlength="10" pattern="[0-3]{1}[0-9]{1}/[0-1]{1}[0-9]{1}/[0-9]{4}" required >
+                            <input class="form-control" size="16" type="text" value="" placeholder="dd/mm/yyyy" name="dl" id="dl" maxlength="10" pattern="[0-3]{1}[0-9]{1}/[0-1]{1}[0-9]{1}/[0-9]{4}" required >
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 
@@ -87,7 +87,7 @@
                     <div class="form-group">
                         <label for="hl" class="col-sm-3 control-label">Heure Limite</label>
                         <div class="input-group date form_time col-sm-6 col-xs-12" data-date="" data-date-format="hh:ii" data-link-field="hl" data-link-format="hh:ii">
-                            <input class="form-control" size="16" type="time" value="12:00" id="hl" pattern="[0-2]{0,1}[0-9]{1}:[0-5]{1}[0-9]{1}" maxlength="8" required>
+                            <input class="form-control" size="16" type="text" value="12:00" name="hl"  id="hl" pattern="[0-2]{0,1}[0-9]{1}:[0-5]{1}[0-9]{1}" maxlength="8" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                         </div>
@@ -97,7 +97,7 @@
                     <div class="form-group">
                         <label for="av" class="col-sm-3 control-label">Avant</label>
                         <div class="input-group col-sm-6 col-xs-12">
-                            <select class="form-control" id='av'>
+                            <select class="form-control" id='av' name='av'>
                                 <option value="0">Aucun Tâche</option>
                                 <!-- <option value="1">Task1</option>
                                 <option value="2">Task2</option>
@@ -110,7 +110,7 @@
                     <div class="form-group">
                         <label for="ap" class="col-sm-3 control-label">Après</label>
                         <div class="input-group col-sm-6 col-xs-12">
-                            <select class="form-control" id='ap'>
+                            <select class="form-control" id='ap' name='ap'>
                                 <option value="0">Aucune Tâche</option>
                                 <!-- <option value="1">Task1</option>
                                 <option value="2">Task2</option>
@@ -123,7 +123,7 @@
                     <div class="form-group">
                         <label for="prior" class="col-sm-3 control-label">Priorité</label>
                         <div class="input-group col-sm-6 col-xs-12">
-                            <select class="form-control" id='prior'>
+                            <select class="form-control" id='prior' name='prior'>
                                 <option value="1">Basse</option>
                                 <option value="2">Moyenne</option>
                                 <option value="3">Haute</option>
