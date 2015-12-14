@@ -36,3 +36,22 @@ td, th {
 .underline{
 	text-decoration: underline;
 }
+
+h3{
+	margin-top: 5px!important;
+}
+h2{
+	margin-bottom: 0px!important;
+	margin-top: 0px!important;
+}
+
+
+.imageProjet
+{
+  max-width: 20%;
+  top: 100%;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.9);
+  margin: 12px;
+  margin-top: 0px
+}
