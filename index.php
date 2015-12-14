@@ -76,7 +76,7 @@
                     <div class="form-group">
                         <label for="dl" class="col-sm-3 control-label">Date Limite</label>
                         <div class="input-group date form_date col-sm-6 col-xs-12" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dl" data-link-format="dd/mm/yyyy">
-                            <input class="form-control" size="16" type="text" value="" placeholder="dd/mm/yyyy" name="dl" maxlength="8" pattern="[0-3]{1}[0-9]{1}/[0-1]{1}[0-9]{1}/[0-9]{4}" required >
+                            <input class="form-control" size="16" type="text" value="" placeholder="dd/mm/yyyy" name="dl" maxlength="10" pattern="[0-3]{1}[0-9]{1}/[0-1]{1}[0-9]{1}/[0-9]{4}" required >
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 
@@ -87,7 +87,7 @@
                     <div class="form-group">
                         <label for="hl" class="col-sm-3 control-label">Heure Limite</label>
                         <div class="input-group date form_time col-sm-6 col-xs-12" data-date="" data-date-format="hh:ii" data-link-field="hl" data-link-format="hh:ii">
-                            <input class="form-control" size="16" type="time" placeholder="hh:mm" value="8:00" name="hl" pattern="[0-2]{0,1}[0-9]{1}:[0-5]{1}[0-9]{1}" maxlength="8" required>
+                            <input class="form-control" size="16" type="time" placeholder="hh:mm" value="12:00" name="hl" pattern="[0-2]{0,1}[0-9]{1}:[0-5]{1}[0-9]{1}" maxlength="8" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                         </div>
@@ -135,10 +135,10 @@
             </form>
         </div>
         <br>
-        <!-- <script type="text/javascript" src="../1external/bootstrap.min.js"></script> -->
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <!-- <script type="text/javascript" src="../1external/jquery-11.1.3.min.js"></script> -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+        <!-- <script type="text/javascript" src="../1external/bootstrap.min.js"></script> -->
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../1external/bootstrap-datetimepicker.min.js"></script>
         <script type="text/javascript" src="../1external/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
         <script type="text/javascript">
@@ -152,15 +152,19 @@
                 alert("Le format de la date n'est pas correct. Utilisez le format dd/mm/yyyy");
                 return false;
             }
+            if(tableauH[0]>23){
+                alert("Depuis quand les montres affichent des heures de plus de 24h ?");
+                return false;  
+            }
+            if(tableau[0]>[31, ((((tableau[2] % 4 === 0) && (tableau[2] % 100 !== 0)) || (tableau[2] % 400 === 0)) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][tableau[1]-1];){
+                alert("Et la Saint Glinglin, c'est tous les 35 du mois, aussi ?");
+                return false;     
+            }
             if (tableau[2]<2015 || tableau[2]>2017){
                 if(confirm('Une tâche prévue pour '+tableau[2]+' ? Vous confirmez ?')){
                     return true;
                 }
                 return false;
-            }
-            if(tableauH[0]>23){
-                alert("Depuis quand les montres affichent des heures de plus de 24h ?");
-                return false;  
             }
             return true;
         }
