@@ -35,7 +35,7 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
                 $ap = $_POST["ap"];
                 $hl = $_POST["hl"];
                 $dlATraiter = $_POST["dl"];
-                $dlCoupee = split("/", $dlATraiter);
+                $dlCoupee = explode("/", $dlATraiter);
                 $dl = $dlCoupee[2]."-".$dlCoupee[1]."-".$dlCoupee[0];
                 fputs($monfichier,$dl."\r\n"); 
                 $id_owner = '1';                                // Les comptes utilisateurs ne sont pas encore fonctionnels.

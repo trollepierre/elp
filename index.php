@@ -15,7 +15,7 @@
 <html lang="fr"> 
     <head>
         <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <![endif]-->
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <meta name="title" content="El Projector !"/>
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label for="name_task" class="col-sm-3 control-label">Tâche</label>
                         <div class="input-group col-sm-6 col-xs-12">
-                            <input type="text" class="form-control" name="id_task" id="name_task" maxlength="50" placeholder="Nom de la Tâche" required autofocus/>
+                            <input type="text" class="form-control" name="name_task" id="name_task" maxlength="50" placeholder="Nom de la Tâche" required autofocus/>
                         </div>
                     </div>
 
