@@ -82,13 +82,13 @@
                     <!-- Choix du modèle de projet  -->
                     <div class="form-group">
                         <label for="model" class="col-xs-12 control-label">Modèle de Projet</label>
-                        <a href=""  class="linkProjet" role="button" title="image bigar"> 
+                        <a href="#"  class="linkProjet" role="button" title="image bigar"> 
                             <img src="img/bigar.jpg" class="imageProjet"></img>
                         </a>    
-                        <a href=""  class="linkProjet" role="button" title="image blanc"> 
+                        <a href="#"  class="linkProjet" role="button" title="image blanc"> 
                             <img src="img/blanc.jpg" class="imageProjet"></img>
                         </a>    
-                        <a href=""  class="linkProjet" role="button" title="image rouge"> 
+                        <a href="#"  class="linkProjet" role="button" title="image rouge"> 
                             <img src="img/rouge.jpg" class="imageProjet"></img>
                         </a>
                     </div>
