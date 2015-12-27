@@ -131,6 +131,9 @@ if(!empty( $tableau1)) {
                             token: "<?php echo $_SESSION['token']; ?>"
                         }
                     })
+                    .done(function(){ 
+                        alert("L'ajax a été ajoutée avec succès !");
+                    });
                     alert('Index.php doit être lancé, mais ...');
                 });
             });
