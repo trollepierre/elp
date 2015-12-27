@@ -44,7 +44,8 @@
     <!-- Le bandeau du formulaire de tâche -->
     <div id="task_form" class="bandeau">
         <h3>Ajoutez une tâche :</h3>
-        <form action="traitement/newTask.php" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
+        <!-- <form action="traitement/newTask.php" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12"> -->
+        <form id="form" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
             <div style="display:none;">
                 <input type="hidden" name="token" value=<?php echo $_SESSION['token']; ?> />
             </div> 
@@ -138,6 +139,32 @@
         <?php include("w/jsDTPExternal.php"); ?>  
 
         <script type="text/javascript">
+        $(function(){ 
+            // envoi du formulaire
+            $("#form").submit(function(){
+                if (validateForm()) {
+                    $.ajax({
+                        method: "POST",
+                        url: "traitement/newTask.php",
+                        data: { 
+                            name_task: document.forms["form"]["name_task"].value ,
+                            id_category: document.forms["form"]["id_category"].value ,
+                            prior: document.forms["form"]["prior"].value ,
+                            av: document.forms["form"]["av"].value ,
+                            ap: document.forms["form"]["ap"].value ,
+                            hl: document.forms["form"]["hl"].value ,
+                            dl: document.forms["form"]["dl"].value ,
+                            token: "<?php echo $_SESSION['token']; ?>"
+                        }
+                    })
+                    .done(function(){ 
+                        alert("La tâche a été ajoutée avec succès !");
+                    });
+                    alert("c'est fini")
+                    ;
+                };
+            });
+        });
  function validateForm(){
     var dl = document.forms["form"]["dl"].value ;
     var hl = document.forms["form"]["hl"].value ;
