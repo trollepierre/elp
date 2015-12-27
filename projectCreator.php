@@ -17,94 +17,103 @@
 
         <title>Project Creator - El Projector</title>
         
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <!--   <link rel="stylesheet" href="../1external/bootstrap.min.css"> -->
         <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
-        <link rel="stylesheet" href="css/css.css">
+        <?php include("w/cssExternal.php"); ?>
+
+        
     </head>
 
     <body>
+        <div class="container">
+            <!-- Le bandeau principal avec le texte -->
+            <div id="coeur" class="bandeau">
+                <h1> H E L P - El Projector à la rescousse</h1>
+                <h2>Project Creator</h2>
+            </div>
 
-        <!-- Le bandeau principal avec le texte -->
-        <div id="coeur" class="bandeau">
-            <h1> H E L P - El Projector à la rescousse</h1>
-            <h2>Project Creator</h2>
-        </div>
+            <!-- Le bandeau du formulaire de tâche -->
+            <div id="task_form" class="bandeau">
+                <!-- <h3>Créer un projet :</h3> -->
+                <form action="traitement/newProject.php" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8">
+                    <div style="display:none;">
+                        <input type="hidden" name="token" value=<?php echo $_SESSION['token']; ?> />
+                    </div> 
+                    <fieldset>
+                        <div class "row">
+                            <div class="col-lg-7 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
+                                <!-- Ajout du nom du projet -->
+                                <div class="form-group">
+                                    <label for="name_project" class="col-sm-3 control-label">Projet</label>
+                                    <div class="input-group col-sm-6 col-xs-12">
+                                        <input type="text" class="form-control" name="name_project" id="name_project" maxlength="50" placeholder="Nom du Projet" required autofocus/>
+                                    </div>
+                                </div>
 
-        <!-- Le bandeau du formulaire de tâche -->
-        <div id="task_form" class="bandeau">
-            <!-- <h3>Créer un projet :</h3> -->
-            <form action="traitement/newProject.php" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8">
-                <div style="display:none;">
-                    <input type="hidden" name="token" value=<?php echo $_SESSION['token']; ?> />
-                </div> 
-                <fieldset>
-                    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
-                        <!-- Ajout du nom du projet -->
-                        <div class="form-group">
-                            <label for="name_project" class="col-sm-3 control-label">Projet</label>
-                            <div class="input-group col-sm-6 col-xs-12">
-                                <input type="text" class="form-control" name="name_project" id="name_project" maxlength="50" placeholder="Nom du Projet" required autofocus/>
+                                <!-- Ajout de la DL -->
+                                <div class="form-group">
+                                    <label for="dl" class="col-sm-3 control-label">Date Limite</label>
+                                    <div class="input-group date form_date col-sm-6 col-xs-12" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dl" data-link-format="dd/mm/yyyy">
+                                        <input class="form-control" size="16" type="text" value="" placeholder="dd/mm/yyyy" name="dl" id="dl" maxlength="10" pattern="[0-3]{1}[0-9]{1}/[0-1]{1}[0-9]{1}/[0-9]{4}" required >
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                    </div>
+                                </div>
+
+                                <!-- Ajout du la durée ??? -->
+                                <div class="form-group">
+                                    <label for="duration" class="col-sm-3 control-label">Durée ?</label>
+                                    <div class="input-group col-sm-6 col-xs-12">
+                                        <input type="value" class="col-md-6 col-xs-12" name="duration" id="duration" placeholder="Durée"/>
+                                        <div class="input-group col-md-6 col-xs-12">
+                                            <select class="form-control" id='prior' name='prior'>
+                                                <option value="1">Jours</option>
+                                                <option value="2">Semaines</option>
+                                                <option value="3">Mois</option>
+                                                <option value="4">Années</option>
+                                                <option value="5">Heures</option>
+                                                <option value="6">Minutes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Ajout de l'importance -->
+                                <div class="form-group">
+                                    <label for="prior" class="col-sm-3 control-label">Priorité</label>
+                                    <div class="input-group col-sm-6 col-xs-12">
+                                        <select class="form-control" id='prior' name='prior'>
+                                            <option value="1">Basse</option>
+                                            <option value="2">Moyenne</option>
+                                            <option value="3">Haute</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <!-- Ajout de la DL -->
-                        <div class="form-group">
-                            <label for="dl" class="col-sm-3 control-label">Date Limite</label>
-                            <div class="input-group date form_date col-sm-6 col-xs-12" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dl" data-link-format="dd/mm/yyyy">
-                                <input class="form-control" size="16" type="text" value="" placeholder="dd/mm/yyyy" name="dl" id="dl" maxlength="10" pattern="[0-3]{1}[0-9]{1}/[0-1]{1}[0-9]{1}/[0-9]{4}" required >
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        <!-- Choix du modèle de projet  -->
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-sm-12">
+                                <label for="model" class="col-xs-12 control-label">Modèle de Projet</label>
+                                <a href="#"  class="linkProjet" role="button" title="image bigar"> 
+                                    <img src="img/bigar.jpg" class="imageProjet"></img>
+                                </a>    
+                                <a href="#"  class="linkProjet" role="button" title="image blanc"> 
+                                    <img src="img/blanc.jpg" class="imageProjet"></img>
+                                </a>    
+                                <a href="#"  class="linkProjet" role="button" title="image rouge"> 
+                                    <img src="img/rouge.jpg" class="imageProjet"></img>
+                                </a>
                             </div>
                         </div>
-
-                        <!-- Ajout du la durée ??? -->
-                        <div class="form-group">
-                            <label for="duration" class="col-sm-3 control-label">Durée ?</label>
-                            <div class="input-group col-sm-6 col-xs-12">
-                                <input type="text" class="form-control" name="duration" id="duration" maxlength="50" placeholder="Durée estimée"/>
-                            </div>
-                        </div>
-
-                        <!-- Ajout de l'importance -->
-                        <div class="form-group">
-                            <label for="prior" class="col-sm-3 control-label">Priorité</label>
-                            <div class="input-group col-sm-6 col-xs-12">
-                                <select class="form-control" id='prior' name='prior'>
-                                    <option value="1">Basse</option>
-                                    <option value="2">Moyenne</option>
-                                    <option value="3">Haute</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-2"></div>
-                    <!-- Choix du modèle de projet  -->
-                    <div class="form-group">
-                        <label for="model" class="col-xs-12 control-label">Modèle de Projet</label>
-                        <a href="#"  class="linkProjet" role="button" title="image bigar"> 
-                            <img src="img/bigar.jpg" class="imageProjet"></img>
-                        </a>    
-                        <a href="#"  class="linkProjet" role="button" title="image blanc"> 
-                            <img src="img/blanc.jpg" class="imageProjet"></img>
-                        </a>    
-                        <a href="#"  class="linkProjet" role="button" title="image rouge"> 
-                            <img src="img/rouge.jpg" class="imageProjet"></img>
-                        </a>
-                    </div>
-                </fieldset>
-                <button type="submit" class="btn btn-default">Envoyer</button>
-            </form>
+                    </fieldset>
+                    <button type="submit" class="btn btn-default">Envoyer</button>
+                </form>
+            </div>
         </div>
         <br>
-        <!-- <script type="text/javascript" src="../1external/jquery-11.1.3.min.js"></script> -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-        <!-- <script type="text/javascript" src="../1external/bootstrap.min.js"></script> -->
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="http://externals.recontact.me/bootstrap-datetimepicker.min.js"></script>
-        <script type="text/javascript" src="http://externals.recontact.me/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-        <!-- <script type="text/javascript" src="../1external/bootstrap-datetimepicker.min.js"></script>
-        <script type="text/javascript" src="../1external/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script> -->
+        <?php include("w/jsExternal.php"); ?>
+        <?php include("w/jsDTPExternal.php"); ?>  
+        
         <script type="text/javascript">
         
         //selection de l'image *** a faire ***   --> definir un post "model"
@@ -136,9 +145,9 @@
                 }                    
             });
         });
-        
-        function validateForm(){
-            var dl = document.forms["form"]["dl"].value ;
+
+function validateForm(){
+    var dl = document.forms["form"]["dl"].value ;
             // alert("voici : "+x+' !');
             var tableau = dl.split("/");
             if (dl==null || dl == "" || tableau[1]>12 || tableau[0]>31){
@@ -158,29 +167,6 @@
             return true;
         }
         </script>
-        <!-- Langue du calendrier -->
-        <script type="text/javascript">
-        $('.form_date').datetimepicker({
-            language: 'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
-        });
-        $('.form_time').datetimepicker({
-            language: 'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 1,
-            minView: 0,
-            maxView: 1,
-            forceParse: 0
-        });
-        </script>
+
     </body>
     </html>

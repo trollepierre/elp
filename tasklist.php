@@ -18,9 +18,10 @@
         <link rel="icon" href="">
 
         <title>Liste des tâches - El Projector </title>
-        <!--   <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/css.css">        
+       
+       
+        <?php include("w/cssExternal.php"); ?>
+
     </head>
     <body>
     <!-- Le bandeau principal avec le texte -->
@@ -29,6 +30,7 @@
             <h2></h2>
         </div>
         <button id="delete" class="btn btn-danger" type="button"><i class="glyphicon glyphicon-trash"></i> Supprimer</button>
+        <button id="edit" class="btn btn-warning" type="button"><i class="glyphicon glyphicon-pencil"></i> Modifier </button>
         <br/><br>
 <?php
     $reponse = $bdd->query('SELECT * FROM task');
@@ -112,12 +114,26 @@ if(!empty( $tableau1)) {
             </table>
         </div>
         <br>
-        <!-- <script type="text/javascript" src="../1external/bootstrap.min.js"></script> -->
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <!-- <script type="text/javascript" src="../1external/jquery-11.1.3.min.js"></script> -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+        
+        <?php include("w/jsExternal.php"); ?>
+
         <script type="text/javascript">
         $(function(){                
+            // edition des cases cochées
+            $("#edit").on('click',function(){
+                $(".case:checked").each(function(){
+                    // $(this).parents("tr").get(0).remove();
+                    $.ajax({
+                        url: "index.php",
+                        method: "POST",
+                        data: { 
+                            id: $(this).val(), 
+                            token: "<?php echo $_SESSION['token']; ?>"
+                        }
+                    })
+                    alert('Index.php doit être lancé, mais ...');
+                });
+            });
             // suppression des cases cochées
             $("#delete").on('click',function(){
                 $(".case:checked").each(function(){
@@ -128,7 +144,7 @@ if(!empty( $tableau1)) {
                         data: { 
                             id: $(this).val(), 
                             token: "<?php echo $_SESSION['token']; ?>"
-                        },
+                        }
                     })
                 });
             });

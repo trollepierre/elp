@@ -2,8 +2,8 @@
     session_start();//On démarre les sessions
     $_SESSION['token'] = (isset($_SESSION['token'])) ? $_SESSION['token'] : uniqid(rand(), true) ;//Génération de jeton unique
     $_SESSION['token_time'] = time();//Enregistrement d'un timestamp
-?>
-<!DOCTYPE HTML>
+    ?>
+    <!DOCTYPE HTML>
 <!--
     /*
     * El Projector 
@@ -13,58 +13,56 @@
     */
 -->
 <html lang="fr"> 
-    <head>
-        <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <![endif]-->
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <meta name="title" content="El Projector !"/>
-        <meta name="description" content="El Projector is an assistant to help you to manage your life projects.">
-        <meta name="author" content="Pierre Trollé">
-        <link rel="icon" href="../../favicon.ico">
+<head>
+    <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>El Projector</title>
-        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <!--   <link rel="stylesheet" href="../1external/bootstrap.min.css"> -->
-        <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
-        <link rel="stylesheet" href="css/css.css">
-    </head>
+    <meta name="title" content="El Projector !"/>
+    <meta name="description" content="El Projector is an assistant to help you to manage your life projects.">
+    <meta name="author" content="Pierre Trollé">
+    <link rel="icon" href="../../favicon.ico">
 
-    <body>
+    <title>El Projector</title>
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+     <?php include("w/cssExternal.php"); ?>
+   
+</head>
 
-<?php if(isset($_GET['message'])){echo '<script type="text/javascript"> alert("La tâche a été ajoutée avec succès !") </script>';}
+<body>
+
+    <?php if(isset($_GET['message'])){echo '<script type="text/javascript"> alert("La tâche a été ajoutée avec succès !") </script>';}
     elseif (isset($_GET['bug'])){echo '<script type="text/javascript"> alert("Bug ! Désolé : la tâche non ajoutée !") </script>';}
-?>
+    ?>
 
-        <!-- Le bandeau principal avec le texte -->
-        <div id="coeur" class="bandeau">
-            <h1> H E L P - El Projector à la rescousse</h1>
-            <h2><a href="tasklist.php" class="underline" title="Voir la liste des tâches">Voir la liste des tâches</a></h2>
-        </div>
+    <!-- Le bandeau principal avec le texte -->
+    <div id="coeur" class="bandeau">
+        <h1> H E L P - El Projector à la rescousse</h1>
+        <h2><a href="tasklist.php" class="underline" title="Voir la liste des tâches">Voir la liste des tâches</a></h2>
+    </div>
 
-        <!-- Le bandeau du formulaire de tâche -->
-        <div id="task_form" class="bandeau">
-            <h3>Ajoutez une tâche :</h3>
-            <form action="traitement/newTask.php" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
-                <div style="display:none;">
-                    <input type="hidden" name="token" value=<?php echo $_SESSION['token']; ?> />
-                </div> 
-                <fieldset>
-                    <!-- Ajout du nom de la tâche -->
-                    <div class="form-group">
-                        <label for="name_task" class="col-sm-3 control-label">Tâche</label>
-                        <div class="input-group col-sm-6 col-xs-12">
-                            <input type="text" class="form-control" name="name_task" id="name_task" maxlength="50" placeholder="Nom de la Tâche" required autofocus/>
-                        </div>
+    <!-- Le bandeau du formulaire de tâche -->
+    <div id="task_form" class="bandeau">
+        <h3>Ajoutez une tâche :</h3>
+        <form action="traitement/newTask.php" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
+            <div style="display:none;">
+                <input type="hidden" name="token" value=<?php echo $_SESSION['token']; ?> />
+            </div> 
+            <fieldset>
+                <!-- Ajout du nom de la tâche -->
+                <div class="form-group">
+                    <label for="name_task" class="col-sm-3 control-label">Tâche</label>
+                    <div class="input-group col-sm-6 col-xs-12">
+                        <input type="text" class="form-control" name="name_task" id="name_task" maxlength="50" placeholder="Nom de la Tâche" required autofocus/>
                     </div>
+                </div>
 
-                    <!-- Ajout de la catégorie -->
-                    <div class="form-group">
-                        <label for="id_category" class="col-sm-3 control-label">Catégorie</label>
-                        <div class="input-group col-sm-6 col-xs-12">
-                            <select class="form-control" id="id_category" name="id_category">
-                                <option value="0">Aucune Catégorie</option>
+                <!-- Ajout de la catégorie -->
+                <div class="form-group">
+                    <label for="id_category" class="col-sm-3 control-label">Catégorie</label>
+                    <div class="input-group col-sm-6 col-xs-12">
+                        <select class="form-control" id="id_category" name="id_category">
+                            <option value="0">Aucune Catégorie</option>
                                 <!-- <option value="1">Startup</option>
                                 <option value="2">Taf</option>
                                 <option value="3">Autre</option> -->
@@ -135,18 +133,14 @@
             </form>
         </div>
         <br>
-        <!-- <script type="text/javascript" src="../1external/jquery-11.1.3.min.js"></script> -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-        <!-- <script type="text/javascript" src="../1external/bootstrap.min.js"></script> -->
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="http://externals.recontact.me/bootstrap-datetimepicker.min.js"></script>
-        <script type="text/javascript" src="http://externals.recontact.me/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-        <!-- <script type="text/javascript" src="../1external/bootstrap-datetimepicker.min.js"></script>
-        <script type="text/javascript" src="../1external/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script> -->
+        
+        <?php include("w/jsExternal.php"); ?>
+        <?php include("w/jsDTPExternal.php"); ?>  
+
         <script type="text/javascript">
-        function validateForm(){
-            var dl = document.forms["form"]["dl"].value ;
-            var hl = document.forms["form"]["hl"].value ;
+ function validateForm(){
+    var dl = document.forms["form"]["dl"].value ;
+    var hl = document.forms["form"]["hl"].value ;
             // alert("voici : "+x+' !');
             var tableau = dl.split("/");
             var tableauH = hl.split(":");
@@ -171,29 +165,6 @@
             return true;
         }
         </script>
-        <!-- Langue du calendrier -->
-        <script type="text/javascript">
-            $('.form_date').datetimepicker({
-                language: 'fr',
-                weekStart: 1,
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                minView: 2,
-                forceParse: 0
-            });
-            $('.form_time').datetimepicker({
-                language: 'fr',
-                weekStart: 1,
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 1,
-                minView: 0,
-                maxView: 1,
-                forceParse: 0
-            });
-        </script>
+
     </body>
-</html>
+    </html>
