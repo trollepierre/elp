@@ -3,6 +3,7 @@
     $_SESSION['token'] = (isset($_SESSION['token'])) ? $_SESSION['token'] : uniqid(rand(), true) ;//Génération de jeton unique
     $_SESSION['token_time'] = time();//Enregistrement d'un timestamp
     ?>
+    <?php include('traitement/connexion.php'); ?>
     <!DOCTYPE HTML>
 <!--
     /*
@@ -25,14 +26,36 @@
 
     <title>El Projector</title>
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
-     <?php include("w/cssExternal.php"); ?>
-   
+    <?php include("w/cssExternal.php"); ?>
+
 </head>
 
 <body>
 
-    <?php if(isset($_GET['message'])){echo '<script type="text/javascript"> alert("La tâche a été ajoutée avec succès !") </script>';}
-    elseif (isset($_GET['bug'])){echo '<script type="text/javascript"> alert("Bug ! Désolé : la tâche non ajoutée !") </script>';}
+    <?php if(isset($_GET['edit'])){
+        $edit=$_GET['edit'];
+        $reponse = $bdd->query('SELECT * FROM task where id = '.$edit.'');        
+        while ($val = $reponse->fetch())
+        {
+            $name_task=html_entity_decode($val['name_task']);
+            $id_category = $val['id_category'];
+            $dlATraiter = $val['dl'];
+            $hl =  str_split($val['hl'],5)[0]; 
+            $prior = $val['prior'];
+            $av = $val['av'];
+            $ap = $val['ap'];
+            $dlCoupee = explode("-", $dlATraiter);
+            $dl = $dlCoupee[2]."/".$dlCoupee[1]."/".$dlCoupee[0];
+        }
+        $accueil="Editez votre tâche :";
+        // echo '<script type="text/javascript"> alert("Mode édition !") </script>';
+    }
+    elseif (isset($_GET['bug'])){
+        $accueil="Bug : tâche non ajoutée";
+        echo '<script type="text/javascript"> alert("Bug ! Désolé : la tâche non ajoutée !") </script>';
+    }else{
+    $accueil="Ajoutez une tâche :";
+    }
     ?>
 
     <!-- Le bandeau principal avec le texte -->
@@ -43,7 +66,7 @@
 
     <!-- Le bandeau du formulaire de tâche -->
     <div id="task_form" class="bandeau">
-        <h3>Ajoutez une tâche :</h3>
+        <h3><?php echo $accueil; ?></h3>
         <!-- <form action="traitement/newTask.php" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12"> -->
         <form id="form" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
             <div style="display:none;">
@@ -54,7 +77,8 @@
                 <div class="form-group">
                     <label for="name_task" class="col-sm-3 control-label">Tâche</label>
                     <div class="input-group col-sm-6 col-xs-12">
-                        <input type="text" class="form-control" name="name_task" id="name_task" maxlength="50" placeholder="Nom de la Tâche" required autofocus/>
+                        <input type="text" class="form-control" name="name_task" id="name_task" maxlength="50" 
+                        <?php echo (isset($_GET['edit'])) ? "value=".$name_task : "placeholder='Nom de la Tâche'" ;  ?> required autofocus/>
                     </div>
                 </div>
 
@@ -75,7 +99,7 @@
                     <div class="form-group">
                         <label for="dl" class="col-sm-3 control-label">Date Limite</label>
                         <div class="input-group date form_date col-sm-6 col-xs-12" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dl" data-link-format="dd/mm/yyyy">
-                            <input class="form-control" size="16" type="text" value="" placeholder="dd/mm/yyyy" name="dl" id="dl" maxlength="10" pattern="[0-3]{1}[0-9]{1}/[0-1]{1}[0-9]{1}/[0-9]{4}" required >
+                            <input class="form-control" size="16" type="text"  <?php echo (isset($_GET['edit'])) ? "value=".$dl : "placeholder='dd/mm/yyyy' value=''" ; ?> name="dl" id="dl" maxlength="10" pattern="[0-3]{1}[0-9]{1}/[0-1]{1}[0-9]{1}/[0-9]{4}" required >
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 
@@ -86,7 +110,7 @@
                     <div class="form-group">
                         <label for="hl" class="col-sm-3 control-label">Heure Limite</label>
                         <div class="input-group date form_time col-sm-6 col-xs-12" data-date="" data-date-format="hh:ii" data-link-field="hl" data-link-format="hh:ii">
-                            <input class="form-control" size="16" type="text" value="12:00" name="hl"  id="hl" pattern="[0-2]{0,1}[0-9]{1}:[0-5]{1}[0-9]{1}" maxlength="8" required>
+                            <input class="form-control" size="16" type="text" <?php echo (isset($_GET['edit'])) ? "value=".$hl : "value='12:00'" ; ?> name="hl"  id="hl" pattern="[0-2]{0,1}[0-9]{1}:[0-5]{1}[0-9]{1}" maxlength="8" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                         </div>
@@ -124,28 +148,41 @@
                         <div class="input-group col-sm-6 col-xs-12">
                             <select class="form-control" id='prior' name='prior'>
                                 <option value="1">Basse</option>
-                                <option value="2">Moyenne</option>
-                                <option value="3">Haute</option>
-                            </select>
-                        </div>
-                    </div>
-                </fieldset>
-                <button type="submit" class="btn btn-default">Envoyer</button>
-            </form>
-        </div>
-        <br>
-        
-        <?php include("w/jsExternal.php"); ?>
-        <?php include("w/jsDTPExternal.php"); ?>  
+                                
+                                <?php if ($prior>1)  {
+                                    if($prior>2){
+                                        echo   '<option value="2">Moyenne</option>
+                                        <option value="3" selected="selected">Haute</option>';
+                                    }else{
+                                        echo   '<option value="2" selected="selected">Moyenne</option>
+                                        <option value="3">Haute</option>';
+                                    }
+                                }else{
+                                     echo   '<option value="2">Moyenne</option>
+                                             <option value="3">Haute</option>';
+                                }
 
-        <script type="text/javascript">
-        $(function(){ 
+                            ?>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+            <button type="submit" class="btn btn-default">Envoyer</button>
+        </form>
+    </div>
+    <br>
+
+    <?php include("w/jsExternal.php"); ?>
+    <?php include("w/jsDTPExternal.php"); ?>  
+
+    <script type="text/javascript">
+    $(function(){ 
             // envoi du formulaire
             $("#form").submit(function(){
                 if (validateForm()) {
                     $.ajax({
                         method: "POST",
-                        url: "traitement/newTask.php",
+                        url: "traitement/newTask.php<?php echo (isset($_GET['edit'])) ? '?edit='.$edit : '';?>",
                         data: { 
                             name_task: document.forms["form"]["name_task"].value ,
                             id_category: document.forms["form"]["id_category"].value ,
@@ -158,14 +195,15 @@
                         }
                     })
                     .done(function(){ 
-                        alert("La tâche a été ajoutée avec succès !");
+                        <?php $retVal = (isset($_GET['edit'])) ? "éditée" : "ajoutée" ;?>
+                        alert("La tâche a été <?php echo $retVal; ?> avec succès !");
                     });
                     alert("c'est fini")
                     ;
                 };
             });
-        });
- function validateForm(){
+});
+function validateForm(){
     var dl = document.forms["form"]["dl"].value ;
     var hl = document.forms["form"]["hl"].value ;
             // alert("voici : "+x+' !');
