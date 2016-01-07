@@ -1,11 +1,4 @@
 <?php
-$monfichierName='../log/logModeleDeProject.txt';
-// Récupération des variables nécessaires à la création de la tâche    et virer les saloperies de code  
-$name= $_POST['name_modeleproject'];        // un projet est rangé dans les catégories
-$query='INSERT INTO modeledeprojet ( name) VALUES (:name)';
-$exec= array(  'name' => $name );
-
-session_start();
 function startsWith($haystack, $needle) {
     // search backwards starting from haystack length characters from the end
     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
@@ -24,7 +17,7 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
     if($_SESSION['token'] == $_POST['token'])
     {
         fputs($monfichier,"SESSION OK"."\r\n");                 echo('SESSION OK'); echo('<br>');
-        $timestamp_ancien = time() - (15*60);                                       //Stockage du timestamp d'il y a 15 minutes
+        $timestamp_ancien = time() - (60*60);                                       //Stockage du timestamp d'il y a 60 minutes
         if($_SESSION['token_time'] >= $timestamp_ancien)
         {                           //Si le jeton n'est pas expiré
             if(  startsWith($_SERVER['HTTP_REFERER'],'http://localhost/elp') || startsWith($_SERVER['HTTP_REFERER'],'http://elprojector.recontact.me'))
@@ -32,21 +25,19 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
                 fputs($monfichier,'SERVER OK'."\r\n");          echo('SERVER OK <br>');
                 include('connexion.php');
                 fputs($monfichier,'CONNECTION BDD OK'."\r\n");  echo('CONNEXION BDD OK <br>');
-                
-                
-
+ 
                 // Insertion de la nouvelle tâche à l'aide d'une requête préparée
                 $req = $bdd -> prepare($query);
                 $req-> execute($exec);
                 fputs($monfichier,'REQUETE EXECUTEE'."\r\n");   
 
-                header('Location: ../definir.php?model=new');
+                header('Location: ../'.$location);
             }else{
                 fputs($monfichier,'Problème de HTTP_REFERER'."\r\n");
                 header('Location: ../index.php?bug=HTTP_REFERER');
             }
         }else{
-            fputs($monfichier,'Jeton trop vieux - 15 minutes maximum'."\r\n"); 
+            fputs($monfichier,'Jeton trop vieux - 60 minutes maximum'."\r\n"); 
             header('Location: ../index.php?bug=OLD_TOKEN');
         }
     }else{

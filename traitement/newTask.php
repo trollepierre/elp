@@ -1,104 +1,30 @@
 <?php
 session_start();
-function startsWith($haystack, $needle) {
-    // search backwards starting from haystack length characters from the end
-    return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
-}
 
-$monfichier = fopen('../log/logTraitement.txt', 'a+');
-fseek($monfichier, 0);
-fputs($monfichier,"\r\n".date("Y-m-d H:i:s")."\r\n");
-//On va vérifier si le jeton est présent dans la session et dans le formulaire
-if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST['token'])))
-{    //Si le jeton de la session correspond à celui du formulaire
-    $token = $_SESSION['token'] ;
-    $token2 = $_POST['token'] ;
-    fputs($monfichier,"".$token."\r\n");
-    fputs($monfichier,"".$token2."\r\n");
-    if($_SESSION['token'] == $_POST['token'])
-    {
-        fputs($monfichier,"SESSION OK"."\r\n");                 echo('SESSION OK'); echo('<br>');
-        $timestamp_ancien = time() - (15*60);                                       //Stockage du timestamp d'il y a 15 minutes
-        if($_SESSION['token_time'] >= $timestamp_ancien)
-        {                           //Si le jeton n'est pas expiré
-    if(  startsWith($_SERVER['HTTP_REFERER'],'http://localhost/elp') || startsWith($_SERVER['HTTP_REFERER'],'http://elprojector.recontact.me'))
-    {
-        fputs($monfichier,'SERVER OK'."\r\n");          echo('SERVER OK <br>');
-        include('connexion.php');
-        fputs($monfichier,'CONNECTION BDD OK'."\r\n");  echo('CONNEXION BDD OK <br>');
+$monfichierName='../log/logTraitement.txt';
+    // Récupération des variables nécessaires à la création de la tâche    et virer les saloperies de code  
+$name_task = $_POST['name_task'];
+$id_category = $_POST["id_category"];
+$prior = $_POST["prior"];
+$av = $_POST["av"];
+$ap = $_POST["ap"];
+$hl = $_POST["hl"];
+$dlATraiter = $_POST["dl"];
+$dlCoupee = explode("/", $dlATraiter);
+$dl = $dlCoupee[2]."-".$dlCoupee[1]."-".$dlCoupee[0];
+fputs($monfichier,$dl."\r\n"); 
+$id_owner = '1';                                // Les comptes utilisateurs ne sont pas encore fonctionnels.
 
-                // Récupération des variables nécessaires à la création de la tâche    et virer les saloperies de code  
-        $name_task = $_POST['name_task'];
-        $id_category = $_POST["id_category"];
-        $prior = $_POST["prior"];
-        $av = $_POST["av"];
-        $ap = $_POST["ap"];
-        $hl = $_POST["hl"];
-        $dlATraiter = $_POST["dl"];
-        $dlCoupee = explode("/", $dlATraiter);
-        $dl = $dlCoupee[2]."-".$dlCoupee[1]."-".$dlCoupee[0];
-        fputs($monfichier,$dl."\r\n"); 
-        $id_owner = '1';                                // Les comptes utilisateurs ne sont pas encore fonctionnels.
-
-                // Insertion de la nouvelle tâche à l'aide d'une requête préparée
-    fputs($monfichier,'TEST EN COURS'."\r\n");   
-        if(isset($_GET['edit'])){
+if(isset($_GET['edit'])){
     $edit=$_GET['edit'];
-    $req = $bdd -> prepare('UPDATE task  SET  name_task = :name_task, id_category = :id_category, id_owner = :id_owner, dl = :dl, hl = :hl, prior = :prior, av = :av, ap = :ap WHERE id = :edit'); 
-    $req-> execute(array(  'name_task' => $name_task, 'id_category' => $id_category, 'id_owner' => $id_owner, 'dl' => $dl, 'hl' => $hl, 'prior' => $prior, 'av' => $av, 'ap' => $ap, 'edit' => $edit  ));
-    fputs($monfichier,'MAJ EXECUTEE'."\r\n");   
+    $query='UPDATE task  SET  name_task = :name_task, id_category = :id_category, id_owner = :id_owner, dl = :dl, hl = :hl, prior = :prior, av = :av, ap = :ap WHERE id = :edit';
+    $exec= array(  'name_task' => $name_task, 'id_category' => $id_category, 'id_owner' => $id_owner, 'dl' => $dl, 'hl' => $hl, 'prior' => $prior, 'av' => $av, 'ap' => $ap, 'edit' => $edit  );
+    $location='tasklist.php?message=TASKisEDITED';
 }else{
-    $req = $bdd -> prepare('INSERT INTO task ( name_task, id_category, id_owner, dl, hl, prior, av, ap) VALUES (:name_task, :id_category, :id_owner, :dl, :hl, :prior, :av, :ap)');
-    $req-> execute(array(  'name_task' => $name_task, 'id_category' => $id_category, 'id_owner' => $id_owner, 'dl' => $dl, 'hl' => $hl, 'prior' => $prior, 'av' => $av, 'ap' => $ap  ));
-     fputs($monfichier,'INSERTION EXECUTEE'."\r\n");   
+    $query='INSERT INTO task ( name_task, id_category, id_owner, dl, hl, prior, av, ap) VALUES (:name_task, :id_category, :id_owner, :dl, :hl, :prior, :av, :ap)';
+    $exec=array(  'name_task' => $name_task, 'id_category' => $id_category, 'id_owner' => $id_owner, 'dl' => $dl, 'hl' => $hl, 'prior' => $prior, 'av' => $av, 'ap' => $ap  );
+	$location='index.php?message=TASKisADDED';
 }
 
-
-
-/*$stmt = $mysqli->prepare("UPDATE movies SET filmName = ?, 
- filmDescription = ?, 
- filmImage = ?,  
- filmPrice = ?,  
- filmReview = ?  
- WHERE filmID = ?");
-$stmt->bind_param('sssdii',
- $_POST['filmName'],
- $_POST['filmDescription'],
- $_POST['filmImage'],
- $_POST['filmPrice'], 
- $_POST['filmReview'],
- $_POST['filmID']);
-$stmt->execute(); 
-$stmt->close();
-*/
-fputs($monfichier,'REQUETE EXECUTEE'."\r\n");   
-header('Location: ../index.php?message=TASKisADDED');
-}else{
-    fputs($monfichier,'Problème de HTTP_REFERER'."\r\n");
-    header('Location: ../index.php?bug=HTTP_REFERER');
-}
-}else{
-    fputs($monfichier,'Jeton trop vieux - 15 minutes maximum'."\r\n"); 
-    header('Location: ../index.php?bug=OLD_TOKEN');
-}
-}else{
-    fputs($monfichier,'Jeton de session différent du jeton donné'."\r\n"); 
-    header('Location: ../index.php?bug=DIFFERENTS_TOKENS');  
-}
-}else{
-    if(!(isset($_SESSION['token']))){
-        header('Location: ../index.php?bug=SESSION_TOKEN');  
-        fputs($monfichier,'Token de session non défini'."\r\n"); 
-    }             
-    if(!(isset($_SESSION['token_time']))) {
-        header('Location: ../index.php?bug=SESSION_TOKEN_TIME');
-        fputs($monfichier,'Temps du Token de session non défini'."\r\n"); 
-    }            
-    if (!(isset($_POST['token']))){
-        header('Location: ../index.php?bug=TOKEN');
-        fputs($monfichier,'Pas de token envoyé en hidden dans le formulaire, c est pas malin'."\r\n"); 
-    }
-}
-fputs($monfichier,"Fin programme"."\r\n");                  
-fclose($monfichier);
+include('newGeneral.php'); 
 ?>
