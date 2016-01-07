@@ -67,7 +67,6 @@
     <!-- Le bandeau du formulaire de tâche -->
     <div id="task_form" class="bandeau">
         <h3><?php echo $accueil; ?></h3>
-        <!-- <form action="traitement/newTask.php" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12"> -->
         <form id="form" accept-charset="utf-8" class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
             <div style="display:none;">
                 <input type="hidden" name="token" value=<?php echo $_SESSION['token']; ?> />
@@ -78,7 +77,7 @@
                     <label for="name_task" class="col-sm-3 control-label">Tâche</label>
                     <div class="input-group col-sm-6 col-xs-12">
                         <input type="text" class="form-control" name="name_task" id="name_task" maxlength="50" 
-                        <?php echo (isset($_GET['edit'])) ? "value=".$name_task : "placeholder='Nom de la Tâche'" ;  ?> required autofocus/>
+                        <?php echo (isset($_GET['edit'])) ? "value='$name_task'" : "placeholder='Nom de la Tâche'" ; ?> required autofocus/>
                     </div>
                 </div>
 
@@ -194,11 +193,11 @@
                             token: "<?php echo $_SESSION['token']; ?>"
                         }
                     })
-                    .done(function(){ 
+                    // .done(function(){ 
                         <?php $retVal = (isset($_GET['edit'])) ? "éditée" : "ajoutée" ;?>
                         alert("La tâche a été <?php echo $retVal; ?> avec succès !");
-                    });
-                    alert("c'est fini")
+                    // });
+                    // alert("c'est fini")
                     ;
                 };
             });
