@@ -12,7 +12,7 @@ $hl = $_POST["hl"];
 $dlATraiter = $_POST["dl"];
 $dlCoupee = explode("/", $dlATraiter);
 $dl = $dlCoupee[2]."-".$dlCoupee[1]."-".$dlCoupee[0];
-fputs($monfichier,$dl."\r\n"); 
+// fputs($monfichier,$dl."\r\n"); 
 $id_owner = '1';                                // Les comptes utilisateurs ne sont pas encore fonctionnels.
 
 if(isset($_GET['edit'])){

@@ -28,8 +28,17 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
  
                 // Insertion de la nouvelle tâche à l'aide d'une requête préparée
                 $req = $bdd -> prepare($query);
+                if (!$req) {
+                    echo "\nPDO::errorInfo():\n";
+                    print_r($bdd->errorInfo());
+                    fputs($monfichier,"ERROR : ".$bdd->errorInfo()."\r\n");   //cas d'erreur
+                    foreach ($exec as $key => $value) {
+                        fputs($monfichier,$value.", ");   
+                    }
+                }
                 $req-> execute($exec);
-                fputs($monfichier,'REQUETE EXECUTEE'."\r\n");   
+                // fputs($monfichier,$exec."\r\n");   
+                fputs($monfichier,"\r\n".'REQUETE EXECUTEE'."\r\n");   
 
                 header('Location: ../'.$location);
             }else{
