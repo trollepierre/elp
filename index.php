@@ -177,7 +177,7 @@
     <script type="text/javascript">
     $(function(){ 
             // envoi du formulaire
-            $("#form").submit(function(){
+            $("#form").submit(function(event){
                 if (validateForm()) {
                     $.ajax({
                         method: "POST",
@@ -193,12 +193,9 @@
                             token: "<?php echo $_SESSION['token']; ?>"
                         }
                     })
-                    // .done(function(){ 
-                        <?php $retVal = (isset($_GET['edit'])) ? "éditée" : "ajoutée" ;?>
-                        alert("La tâche a été <?php echo $retVal; ?> avec succès !");
-                    // });
-                    // alert("c'est fini")
-                    ;
+                    <?php $retVal = (isset($_GET['edit'])) ? "éditée" : "ajoutée" ;?>
+                    alert("La tâche a été <?php echo $retVal; ?> avec succès !");
+                    event.preventDefault();
                 };
             });
 });
