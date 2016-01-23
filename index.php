@@ -189,10 +189,7 @@
         // si l'utiilisateur choisit un "Nouveau Projet"
         $( "select" ).change(function() {
             if ($( "select option:selected" ).val() == "0"){
-                alert('bingo');
-                //à rediriger vers projectCreator
                 window.location.replace("projectCreator.php?new=on");
-
             }
         })
             // envoi du formulaire
