@@ -4,7 +4,7 @@ session_start();
 $monfichierName='../log/logTraitement.txt';
     // Récupération des variables nécessaires à la création de la tâche    et virer les saloperies de code  
 $name_task = $_POST['name_task'];
-$id_category = $_POST["id_category"];
+$id_project = $_POST["id_project"];
 $prior = $_POST["prior"];
 $av = $_POST["av"];
 $ap = $_POST["ap"];
@@ -17,12 +17,12 @@ $id_owner = '1';                                // Les comptes utilisateurs ne s
 
 if(isset($_GET['edit'])){
     $edit=$_GET['edit'];
-    $query='UPDATE task  SET  name_task = :name_task, id_category = :id_category, id_owner = :id_owner, dl = :dl, hl = :hl, prior = :prior, av = :av, ap = :ap WHERE id = :edit';
-    $exec= array(  'name_task' => $name_task, 'id_category' => $id_category, 'id_owner' => $id_owner, 'dl' => $dl, 'hl' => $hl, 'prior' => $prior, 'av' => $av, 'ap' => $ap, 'edit' => $edit  );
+    $query='UPDATE task  SET  name_task = :name_task, id_project = :id_project, id_owner = :id_owner, dl = :dl, hl = :hl, prior = :prior, av = :av, ap = :ap WHERE id = :edit';
+    $exec= array(  'name_task' => $name_task, 'id_project' => $id_project, 'id_owner' => $id_owner, 'dl' => $dl, 'hl' => $hl, 'prior' => $prior, 'av' => $av, 'ap' => $ap, 'edit' => $edit  );
     $location='tasklist.php?message=TASKisEDITED';
 }else{
-    $query='INSERT INTO task ( name_task, id_category, id_owner, dl, hl, prior, av, ap) VALUES (:name_task, :id_category, :id_owner, :dl, :hl, :prior, :av, :ap)';
-    $exec=array(  'name_task' => $name_task, 'id_category' => $id_category, 'id_owner' => $id_owner, 'dl' => $dl, 'hl' => $hl, 'prior' => $prior, 'av' => $av, 'ap' => $ap  );
+    $query='INSERT INTO task ( name_task, id_project, id_owner, dl, hl, prior, av, ap) VALUES (:name_task, :id_project, :id_owner, :dl, :hl, :prior, :av, :ap)';
+    $exec=array(  'name_task' => $name_task, 'id_project' => $id_project, 'id_owner' => $id_owner, 'dl' => $dl, 'hl' => $hl, 'prior' => $prior, 'av' => $av, 'ap' => $ap  );
 	$location='index.php?message=TASKisADDED';
 }
 

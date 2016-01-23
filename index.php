@@ -38,7 +38,7 @@
         while ($val = $reponse->fetch())
         {
             $name_task=html_entity_decode($val['name_task']);
-            $id_category = $val['id_category'];
+            $id_project = $val['id_project'];
             $dlATraiter = $val['dl'];
             $hl =  str_split($val['hl'],5)[0]; 
             $prior = $val['prior'];
@@ -83,16 +83,26 @@
 
                 <!-- Ajout de la catégorie -->
                 <div class="form-group">
-                    <label for="id_category" class="col-sm-3 control-label">Catégorie</label>
+                    <label for="id_project" class="col-sm-3 control-label"><a href="projectCreator.php"> Projet</a></label>
                     <div class="input-group col-sm-6 col-xs-12">
-                        <select class="form-control" id="id_category" name="id_category">
-                            <option value="0">Aucune Catégorie</option>
+                        <select class="form-control" id="id_project" name="id_project">
+                            <?php 
+                            $reponse = $bdd->query('SELECT * FROM project');
+                            $k=0;
+                            while ($val = $reponse->fetch())
+                            {
+                                echo "<option value=".$val['id'].">".$val['name_project']."</option>";
+                                $k++;
+                            }
+                            ?>
+                            <option value="0">Nouveau Projet</option>
+                            <?php echo $name[2];?>
                                 <!-- <option value="1">Startup</option>
                                 <option value="2">Taf</option>
                                 <option value="3">Autre</option> -->
-                            </select>
-                        </div>
+                        </select>
                     </div>
+                </div>
 
                     <!-- Ajout de la DL -->
                     <div class="form-group">
@@ -175,7 +185,16 @@
     <?php include("w/jsDTPExternal.php"); ?>  
 
     <script type="text/javascript">
-    $(function(){ 
+    $(function(){
+        // si l'utiilisateur choisit un "Nouveau Projet"
+        $( "select" ).change(function() {
+            if ($( "select option:selected" ).val() == "0"){
+                alert('bingo');
+                //à rediriger vers projectCreator
+                window.location.replace("projectCreator.php?new=on");
+
+            }
+        })
             // envoi du formulaire
             $("#form").submit(function(event){
                 if (validateForm()) {
@@ -184,7 +203,7 @@
                         url: "traitement/newTask.php<?php echo (isset($_GET['edit'])) ? '?edit='.$edit : '';?>",
                         data: { 
                             name_task: document.forms["form"]["name_task"].value ,
-                            id_category: document.forms["form"]["id_category"].value ,
+                            id_project: document.forms["form"]["id_project"].value ,
                             prior: document.forms["form"]["prior"].value ,
                             av: document.forms["form"]["av"].value ,
                             ap: document.forms["form"]["ap"].value ,

@@ -54,7 +54,7 @@
                 $tableau2[$k] = $dl;
                 $tableau3[$k] = str_split($hl,5)[0];
                 $tableau4[$k] = html_entity_decode($val['name_task']);
-                $tableau5[$k] = $val['id_category'];
+                $tableau5[$k] = $val['id_project'];
                 $tableau6[$k] = $prior;
                 $tableau7[$k] = $val['av'];
                 $tableau8[$k] = $val['ap'];
@@ -71,13 +71,14 @@
                             <th>Date Limite</th>
                             <th>Heure Limite</th>
                             <th>Nom Tâche</th>
-                            <th>Catégorie</th>
+                            <th>Projet</th>
                             <th>Priorité</th>
                             <th>Avant</th>
                             <th>Après</th>
                         </tr>
                         <?php   
                         if(!empty( $tableau1)) {
+
     arsort($tableau1);//tri tableau
     foreach ($tableau1 as $k => $val) {
         $val=floor($val);
@@ -96,7 +97,11 @@
         <td><?php echo $tableau2[$k]; ?></td>
         <td><?php echo $tableau3[$k]; ?></td>
         <td><?php echo $tableau4[$k]; ?></td>
-        <td><?php echo $tableau5[$k]; ?></td>
+        <td><?php // tableau5 : remplace id project by project
+        $reponse = $bdd->query('SELECT name_project FROM project where id = '.$tableau5[$k]);
+        echo $reponse->fetch()[0];
+        ?>
+        </td>
         <td><?php 
         $priorite=$tableau6[$k];
         if ($priorite=="3") {

@@ -3,6 +3,7 @@
     $_SESSION['token'] = (isset($_SESSION['token'])) ? $_SESSION['token'] : uniqid(rand(), true) ;//Génération de jeton unique
     $_SESSION['token_time'] = time();//Enregistrement d'un timestamp
     ?>
+    <?php include('traitement/connexion.php'); ?>
     <!DOCTYPE HTML>
     <html lang="fr"> 
     <head>
@@ -61,10 +62,10 @@
 
                                 <!-- Ajout du la durée ??? -->
                                 <div class="form-group">
-                                    <label for="duration" class="col-sm-3 control-label">Durée ?</label>
+                                    <label for="duration" class="col-sm-3 control-label">Nb jours</label>
                                     <div class="input-group col-sm-6 col-xs-12">
-                                        <input type="value" class="col-md-6 col-xs-12" name="duration" id="duration" placeholder="Durée"/>
-                                        <div class="input-group col-md-6 col-xs-12">
+                                        <input type="value" class="form-control" name="duration" id="duration" placeholder="Durée"/>
+                                        <!-- <div class="input-group col-md-6 col-xs-12">
                                             <select class="form-control" id='prior' name='prior'>
                                                 <option value="1">Jours</option>
                                                 <option value="2">Semaines</option>
@@ -73,7 +74,7 @@
                                                 <option value="5">Heures</option>
                                                 <option value="6">Minutes</option>
                                             </select>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
 
@@ -91,18 +92,51 @@
                             </div>
                         </div>
                         <!-- Choix du modèle de projet  -->
-                        <div class="row">
+                        <div class="row" style="display: none;">
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label for="model" class="col-xs-12 control-label">Modèle de Projet</label>
-                                <a href="#"  class="linkProjet" role="button" title="image bigar"> 
-                                    <img src="img/bigar.jpg" class="imageProjet"></img>
-                                </a>    
-                                <a href="#"  class="linkProjet" role="button" title="image blanc"> 
-                                    <img src="img/blanc.jpg" class="imageProjet"></img>
-                                </a>    
-                                <a href="#"  class="linkProjet" role="button" title="image rouge"> 
-                                    <img src="img/rouge.jpg" class="imageProjet"></img>
-                                </a>
+                                
+                                <!-- les modèles de projet à insérer -->
+                                <?php 
+                                $reponse = $bdd->query('SELECT * FROM modeledeprojet');
+                                $k=0;
+                                while ($val = $reponse->fetch())
+                                {
+                                    $name[$k] = $val['name'];
+                                    $k++;
+                                }
+                                ?>
+                                <ul class="col-xs-12">
+                                    <li href="#"  class="linkProjet" role="button" title="image rouge" display="block"> 
+                                        <img src="img/rouge.jpg" class="imageProjet"></img>
+                                        <br/>
+                                        <?php echo $name[2];?>
+                                        <br/>
+                                        <input type="radio" name="gender" value="2" checked>
+                                    </li>
+                                    <li href="#"  class="linkProjet" role="button" title="image bigar" display="block"> 
+                                        <img src="img/rouge.jpg" class="imageProjet"> </img>
+                                        <br/>
+                                        <?php echo $name[3];?>
+                                        <br/>
+                                        <input type="radio" name="gender" value="3">
+                                    </li>    
+                                    <li href="#"  class="linkProjet" role="button" title="image blanc" display="block"> 
+                                        <img src="img/bigar.jpg" class="imageProjet"></img>
+                                        <br/>
+                                        <?php echo $name[4];?>
+                                        </br>
+                                        <input type="radio" name="gender" value="4">
+                                    </li>    
+                                    <li href="#"  class="linkProjet" role="button" title="image rouge"  display="block"> 
+                                        <img src="img/blanc.jpg" class="imageProjet"></img>
+                                        <br/>
+                                        <?php echo $name[0];?>
+                                        </br>
+                                        <input type="radio" name="gender" value="0">
+                                    </li>
+                                </ul>
+                                
                             </div>
                         </div>
                     </fieldset>
@@ -118,32 +152,7 @@
         
         //selection de l'image *** a faire ***   --> definir un post "model"
         $(function(){                
-            // suppression des cases cochées
-            $(".linkProjet").on('click',function(){
-                $(".case:checked").each(function(){
-                    $(this).parents("tr").get(0).remove();
-                    $.ajax({
-                        method: "POST",
-                        url: "traitement/delete.php",
-                        data: { 
-                            id: $(this).val(), 
-                            token: "<?php echo $_SESSION['token']; ?>"
-                        },
-                    })
-                });
-            });
-            //add multiple select / deselect functionnality
-            $("#selectall").click(function(){
-                $('.case').prop('checked',this.checked);
-            });
-            // if all checkbox are selected, check the selectall checkbox and viceversa
-            $(".case").click(function(){
-                if ($(".case").length == $(".case:checked").length) {
-                    $("#selectall").prop("checked","checked");
-                }else{
-                    $("#selectall").removeAttr("checked");
-                }                    
-            });
+            
         });
 
 function validateForm(){
