@@ -126,7 +126,7 @@
                     </div>
 
                     <!-- Ajout de tâche précédente -->
-                    <div class="form-group">
+                    <div class="form-group" style="display:none">
                         <label for="av" class="col-sm-3 control-label">Avant</label>
                         <div class="input-group col-sm-6 col-xs-12">
                             <select class="form-control" id='av' name='av'>
@@ -139,7 +139,7 @@
                     </div>
 
                     <!-- Ajout de tâche suivante -->
-                    <div class="form-group">
+                    <div class="form-group" style="display:none">
                         <label for="ap" class="col-sm-3 control-label">Après</label>
                         <div class="input-group col-sm-6 col-xs-12">
                             <select class="form-control" id='ap' name='ap'>
