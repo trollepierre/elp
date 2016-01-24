@@ -212,6 +212,8 @@
                     <?php $retVal = (isset($_GET['edit'])) ? "éditée" : "ajoutée" ;?>
                     alert("La tâche a été <?php echo $retVal; ?> avec succès !");
                     event.preventDefault();
+                    <?php $comportement = (isset($_GET['edit'])) ? "window.location.replace('tasklist.php');":"window.location.replace('index.php');";?>
+                    <?php echo $comportement; ?>
                 };
             });
 });
