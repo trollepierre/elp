@@ -37,7 +37,7 @@
         $reponse = $bdd->query('SELECT * FROM task where id = '.$edit.'');        
         while ($val = $reponse->fetch())
         {
-            $name_task=htmlentities($val['name_task']);
+            $name_task=htmlspecialchars($val['name_task']);
             $id_project = $val['id_project'];
             $dlATraiter = $val['dl'];
             $hl =  str_split($val['hl'],5)[0]; 
