@@ -34,9 +34,12 @@
             <a href="index.php" id="add" class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>  Ajouter</a>
             <button id="delete" class="btn btn-danger" type="button"><i class="glyphicon glyphicon-trash"></i> Supprimer</button>
             <button id="edit" class="btn btn-warning" disabled="disabled" type="submit"><i class="glyphicon glyphicon-pencil"></i> Modifier </button>
+            <a href="projectCreator.php" id="add" class="btn btn-info" type="button"><i class="glyphicon glyphicon-plus"></i>  Ajouter un projet</a>
             <br/><br>
             <?php
-            $reponse = $bdd->query('SELECT * FROM task');
+            $project = (isset($_GET['project'])) ? " WHERE id_project = ".$_GET['project'] : "" ;
+            $nbproject = (isset($_GET['project'])) ? $_GET['project'] : "" ;
+            $reponse = $bdd->query('SELECT * FROM task'.$project);
             $k=0;
             while ($val = $reponse->fetch())
             {
@@ -71,7 +74,20 @@
                             <th>Date Limite</th>
                             <th>Heure Limite</th>
                             <th>Nom Tâche</th>
-                            <th>Projet</th>
+                            <th>
+                                <select class="form-control" id='filtreProjet' name='filtreProjet' onchange="filtreChange()">
+                                    <option value="0">Tous les Projets</option>
+                                    <?php 
+                                    // Bouton de choix du filtre par projet
+                                    $reponse = $bdd->query('SELECT * FROM project');
+                                    while ($val = $reponse->fetch()){
+                                        // $sel=' selected="selected" ';
+                                        $sel = ($val['id']==$nbproject) ? ' selected="selected" ' : "" ;
+                                        echo '<option '.$sel.'value="'.$val['id'].'">'.$val['name_project']."</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </th>
                             <th>Priorité</th>
                             <th>Avant</th>
                             <th>Après</th>
@@ -85,10 +101,10 @@
         ?>
         <tr class="
         <?php
-        if($val>150){echo "danger";}
-        elseif($val>75){echo "warning";}
-        elseif($val>50){echo "success";}
-        elseif($val>25){echo "info";}
+        if($val>100){echo "danger";}
+        elseif($val>50){echo "warning";}
+        elseif($val>25){echo "success";}
+        elseif($val>10){echo "info";}
         else{echo "active";}
         ?>      
         ">
@@ -127,7 +143,15 @@
     <?php include("w/jsExternal.php"); ?>
 
     <script type="text/javascript">
-    $(function(){                
+    function filtreChange(){
+        if($("#filtreProjet").val()==0){
+            window.location.replace("tasklist.php");            
+        }else{
+            window.location.replace("tasklist.php?project="+$("#filtreProjet").val()); 
+        }      
+    }
+
+    $(function(){           
             // edition de la case cochée
             $("#edit").on('click',function(){
                 //le each à virer ?
