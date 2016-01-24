@@ -77,7 +77,7 @@
                     <label for="name_task" class="col-sm-3 control-label">Tâche</label>
                     <div class="input-group col-sm-6 col-xs-12">
                         <input type="text" class="form-control" name="name_task" id="name_task" maxlength="50" 
-                        <?php echo (isset($_GET['edit'])) ? "value='$name_task'" : "placeholder='Nom de la Tâche'" ; ?> required autofocus/>
+                        <?php echo (isset($_GET['edit'])) ? 'value="'.$name_task.'" ': 'placeholder="Nom de la Tâche"' ; ?> required autofocus/>
                     </div>
                 </div>
 

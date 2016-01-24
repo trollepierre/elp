@@ -29,7 +29,7 @@
             <h1>H E L P - El Projector  à la rescousse </h1>
             <h2></h2>
         </div>
-        <form action="index.php?edit=1" id="form" method="post" onsubmit="return validateForm()" accept-charset="utf-8" >
+        <form action="index.php?edit=1" id="form" method="post" accept-charset="utf-8" >
 
             <a href="index.php" id="add" class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>  Ajouter</a>
             <button id="delete" class="btn btn-danger" type="button"><i class="glyphicon glyphicon-trash"></i> Supprimer</button>
