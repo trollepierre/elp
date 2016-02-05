@@ -1,8 +1,12 @@
 <?php
-session_start();
+include_once 'includes/db_connect.php';
+include_once 'includes/functions.php';
+ 
+sec_session_start();
 
 $monfichierName='../log/logModeleDeProjet.txt';
 $location='definir.php?model=new';
+$id_owner = htmlentities($_SESSION['id']);
 // Récupération des variables nécessaires à la création de la tâche    et virer les saloperies de code  
 $name= $_POST['name_modeleproject'];        // un projet est rangé dans les catégories
 $query='INSERT INTO modeledeprojet ( name, dl , duree, priorite) VALUES (:name,:dl,:duree,:priorite)';
