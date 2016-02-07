@@ -30,10 +30,10 @@ sec_session_start();
             <span class="error">Vous n’avez pas les autorisations nécessaires pour accéder à cette page.</span> Please <a href="index.php">login</a>.
         </p>
     <?php else : ?>
-    <p>Bienvenue <?php echo htmlentities($_SESSION['username']); ?> !</p>
+    <p>Bienvenue <?php echo htmlentities($_SESSION['username']);?> !</p>
     <!-- Le bandeau principal avec le texte -->
     <div id="coeur" class="bandeau">
-        <h1>H E L P - El Projector  à la rescousse <?php ($_SESSION['user_id']); ?></h1>
+        <h1>H E L P - El Projector  à la rescousse</h1>
         <h2></h2>
     </div>
     <form action="taskCreator.php?edit=1" id="form" method="post" accept-charset="utf-8" >
@@ -46,8 +46,10 @@ sec_session_start();
         <br/><br>
         <?php
         $nbproject = (isset($_GET['project'])) ? $_GET['project'] : "" ;
-        $project = (!($nbproject=="")) ? " & id_project = ".$nbproject : "" ;
+        $sort = (isset($_GET['sort'])) ? $_GET['sort'] : 'criticite' ;
+        $project = (!($nbproject=="")) ? " AND id_project = ".$nbproject : "" ;
         $reponse = $bdd->query('SELECT * FROM task WHERE id_owner ='.htmlentities($_SESSION['user_id']).$project );
+
         $k=0;
         while ($val = $reponse->fetch())
         {
@@ -87,7 +89,7 @@ sec_session_start();
                                 <option value="0">Tous les Projets</option>
                                 <?php 
                                     // Bouton de choix du filtre par projet
-                                $reponse = $bdd->query('SELECT * FROM project');
+                                $reponse = $bdd->query('SELECT * FROM project WHERE id_owner ='.htmlentities($_SESSION['user_id']));
                                 while ($val = $reponse->fetch()){
                                         // $sel=' selected="selected" ';
                                     $sel = ($val['id']==$nbproject) ? ' selected="selected" ' : "" ;
@@ -101,9 +103,9 @@ sec_session_start();
                         <th>Après</th>
                     </tr>
                     <?php   
+                        
                     if(!empty( $tableau1)) {
 
-                        $sort = (isset($_GET['sort'])) ? $_GET['sort'] : 'criticite' ;
                         if ($sort=="dl") {
         asort($tableau2);//tri tableau par dl
         $tableau0=$tableau2;

@@ -87,7 +87,7 @@ sec_session_start();
                     <div class="input-group col-sm-6 col-xs-12">
                         <select class="form-control" id="id_project" name="id_project">
                             <?php 
-                            $reponse = $bdd->query('SELECT * FROM project');
+                            $reponse = $bdd->query('SELECT * FROM project WHERE id_owner ='.htmlentities($_SESSION['user_id']));
                             $nbproject = (isset($_GET['edit'])) ? $_GET['project'] : "" ;
                             while ($val = $reponse->fetch())
                             {
