@@ -91,7 +91,7 @@ sec_session_start();
                             $nbproject = (isset($_GET['edit'])) ? $_GET['project'] : "" ;
                             while ($val = $reponse->fetch())
                             {
-                                $sel = ($val['id']==$nbproject) ? ' selected="selected" ' : "" ;
+                                $sel = ($val['id']==$id_project) ? ' selected="selected" ' : "" ;
                                 echo '<option '.$sel.'value="'.$val['id'].'">'.$val['name_project']."</option>";
                             }
                             ?>
