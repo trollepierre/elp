@@ -30,11 +30,21 @@ Partie sécurité :
 	register success.php : enregistrement réussi
 	error.php : erreur d'enregistrement
 
-
-
-	delete.php pour la suppression des tâches en base de données
-
+Partie traitement :
 	connexion.php pour me connecter avec la bdd
+	delete.php pour la suppression des tâches en base de données
+	deleteProject.php pour la suppression des projets en base de données
+	newEtape.php : KO
+	newGeneral : redondance des traitements
+	newModeleDeProjet : KO
+	newProject : insertion/edition de projets
+	newTask : insertion/edition de tâches
+
+Partie w :
+	cssExternal : où je prends mes fichiers css
+	jsDTPExternal : où je prends mes fichiers Javascript DateTimePicker
+	jsExternal : où je prends mes fichiers JS
+
 	pull.php pour le git pull automatique sur mon serveur
 
 	
