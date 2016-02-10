@@ -38,6 +38,11 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
                 }
                 $req-> execute($exec);
                 fputs($monfichier,'REQUETE EXECUTEE'."\r\n");   
+                fputs($monfichier,$query."\r\n");   
+                foreach ($exec as $key => $value) {
+                    fputs($monfichier,$key.": ".$value."\r\n");  
+                }
+                 
 
                 if(isset($query2)){
                     $req = $bdd -> prepare($query2);
@@ -51,8 +56,10 @@ if((isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($_POST[
                     }
                     $req-> execute($exec2);
                     fputs($monfichier,'REQUETE 2 EXECUTEE'."\r\n");   
+                }else{
+                    fputs($monfichier,'PAS DE REQUETE 2'."\r\n");   
                 }
-                // fputs($monfichier,$exec."\r\n");   
+                
                 
 
                 header('Location: ../'.$location);

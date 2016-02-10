@@ -25,6 +25,7 @@ sec_session_start();
     </head>
 
     <body>
+         <div class="container">
         <?php if (login_check($mysqli) == false) : ?>
         <p>
             <span class="error">Vous n’avez pas les autorisations nécessaires pour accéder à cette page.</span> Please <a href="index.php">login</a>.
@@ -160,7 +161,7 @@ sec_session_start();
 </div>
 <br>
 <form>
-
+</div> <!-- container -->
     <?php include("w/jsExternal.php"); ?>
 
     <script type="text/javascript">

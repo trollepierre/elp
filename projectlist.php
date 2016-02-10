@@ -25,6 +25,7 @@ sec_session_start();
     </head>
 
     <body>
+        <div class="container">
         <?php if (login_check($mysqli) == false) : ?>
         <p>
             <span class="error">Vous n’avez pas les autorisations nécessaires pour accéder à cette page.</span> Please <a href="index.php">login</a>.
@@ -45,13 +46,16 @@ sec_session_start();
         <a href="tasklist.php" id="add" class="btn btn-primary" type="button"><i class="glyphicon glyphicon-plus"></i>  Voir la liste des tâches</a>
         <br/><br>
         <?php
-        $reponse = $bdd->query('SELECT * FROM project');
+        $reponse = $bdd->query('SELECT * FROM project WHERE id_owner ='.htmlentities($_SESSION['user_id']));
         $k=0;
         while ($val = $reponse->fetch())
         {
             $tableau1[$k] = $val['name_project'];
             $tableau2[$k] = $val['dl'];
-            $tableau3[$k] = $val['prior'];
+            $dt1=new DateTime($tableau2[$k]);
+            $dt2=new DateTime(date('Y-m-d')); //today
+            $interval = date_diff($dt1,$dt2);
+            $tableau3[$k] = $interval->format('%a');;
             $tableau4[$k] = $val['prior'];
             $tableau9[$k] = $val['id'];
             $k++;
@@ -63,7 +67,7 @@ sec_session_start();
                     <tr>
                         <th><input id="selectall" type="checkbox" autofocus></th>
                         <th>Nom du Projet</th>
-                        <th>Date Limite</th>
+                        <th>Date de création</th> <!-- <th>Date Limite</th> -->
                         <th>Durée</th>
                         <th>Priorité</th>
                     </tr>
@@ -80,14 +84,16 @@ sec_session_start();
             <td><?php echo $tableau2[$k]; ?></td>
             <td><?php echo $tableau3[$k]; ?></td>
             <td><?php 
-            $priorite=$tableau4[$k];
+            echo "Non défini";
+            /*$priorite=$tableau4[$k];
             if ($priorite=="3") {
                 echo "Haute";
             }elseif ($priorite=="2") {
                 echo "Moyenne";
             }else{
                 echo "Basse";
-            }?>
+            }*/
+            ?>
         </td>
 
     </tr>
@@ -99,7 +105,7 @@ sec_session_start();
 </div>
 <br>
 <form>
-
+</div> <!-- container -->
     <?php include("w/jsExternal.php"); ?>
 
     <script type="text/javascript">
@@ -120,9 +126,9 @@ sec_session_start();
             });
             // suppression des cases cochées
             $("#delete").on('click',function(){
+                alert("Attention les tâches affectées à ce projet seront réaffectées au projet Général");
                 $(".case:checked").each(function(){
                     $(this).parents("tr").get(0).remove();
-                    alert("Attention les tâches affectées à ce projet seront réaffectées au projet Général");
                     $.ajax({
                         method: "POST",
                         url: "traitement/deleteProject.php",

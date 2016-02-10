@@ -151,7 +151,6 @@ sec_session_start();
                         <div class="input-group col-sm-6 col-xs-12">
                             <select class="form-control" id='prior' name='prior'>
                                 <option value="1">Basse</option>
-                                
                                 <?php if ($prior>1)  {
                                     if($prior>2){
                                         echo   '<option value="2">Moyenne</option>
@@ -164,7 +163,6 @@ sec_session_start();
                                    echo   '<option value="2">Moyenne</option>
                                    <option value="3">Haute</option>';
                                }
-
                                ?>
                            </select>
                        </div>

@@ -1,6 +1,6 @@
 <?php
-include_once 'includes/db_connect.php';
-include_once 'includes/functions.php';
+include_once '../includes/db_connect.php';
+include_once '../includes/functions.php';
  
 sec_session_start();
 
@@ -13,7 +13,7 @@ $dlATraiter= $_POST['dl_etape'] ;
 $duree_etape= $_POST['duree_etape'] ;
 $period_etape= $_POST['period_etape'] ;
 $prior= $_POST['prior_etape'] ;
-$id_owner = htmlentities($_SESSION['id']);
+$id_owner = htmlentities($_SESSION['user_id']);
 $parent="1";//faudrait-il cacher un id de name-modeleprojet
 $rang="1"; // obtenir le rang
 // $duree= $duree_etape * $period_etape; //à mathématiser
